@@ -1,0 +1,55 @@
+Hongsheng Wang
+Zhejiang University, Hangzhou, China
+Loctek Ergonomic Technology Corp., China
+wanghongsheng@zju.edu.cn
+
+19 October 2026
+
+The Editor-in-Chief
+Data & Knowledge Engineering
+
+Dear Editor,
+
+We submit the manuscript "Label-Level Hierarchical Selective Acceptance of LLM
+Annotations with Certified Error Control" for consideration as a research
+article in Data & Knowledge Engineering.
+
+Large language models are now a common first-pass annotator for knowledge bases
+and data catalogues, and the labels they produce are frequently hierarchical.
+The paper addresses a data-quality question that arises when such labels are
+loaded into a database: which machine labels may be written without human
+review, with a guaranteed bound on their error rate and as little review effort
+as possible. Existing selective-annotation methods decide per item and accept or
+reject all labels of an item together. We show that deciding per label, while
+keeping the accepted labels ancestor-closed in the taxonomy, accepts
+substantially more correct labels at the same certified error level when the
+target error is moderate.
+
+The contributions are (i) a formulation of label-level hierarchical selective
+acceptance with an explicit reviewing-cost model; (ii) a method that certifies
+per-depth thresholds with a learn-then-test procedure in which every
+data-dependent design choice is made on data disjoint from the calibration
+sample; (iii) a proof that the deployed rule bounds the label-level error ratio with high probability under i.i.d. items, without assuming
+independence between the labels of an item; and (iv) an evaluation on four
+public hierarchical corpora with two LLM annotators, six baselines, ablations
+under fixed test statistics and sensitivity analyses, including the settings in which the method does not win.
+
+We believe the work fits the journal's scope on the construction and
+maintenance of data and knowledge bases, in particular data acquisition methods
+and integrity of the stored knowledge. All data are public, and the code, the
+cached LLM responses and the per-split results are released so that every
+number can be reproduced without API access.
+
+The manuscript has not been published and is not under consideration
+elsewhere. A related but distinct manuscript by the same first author,
+"Calibrating Multi-Axis Multi-Label Annotators with Cross-Axis Co-Occurrence",
+is under review through ACL Rolling Review; it studies post-hoc calibration of
+confidence scores, whereas the present paper studies certified acceptance
+decisions, and the two share no method, experiment or text. Both authors
+approved the submission. Hongsheng Wang is also affiliated with Loctek
+Ergonomic Technology Corp., as disclosed in the competing-interest statement.
+
+Thank you for considering our work.
+
+Sincerely,
+Hongsheng Wang (corresponding author), on behalf of both authors

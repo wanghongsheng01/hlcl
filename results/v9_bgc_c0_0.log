@@ -1,0 +1,32 @@
+{'n_items': 3000, 'depth': 3, 'invalid_samples': 0, 'n_nodes': 9000, 'acc_by_depth': [0.9776666666666667, 0.8526666666666667, 0.7103333333333334]}
+  split 10/100
+  split 20/100
+  split 30/100
+  split 40/100
+  split 50/100
+  split 60/100
+  split 70/100
+  split 80/100
+  split 90/100
+  split 100/100
+
+alpha=0.05 (R=100)
+method            FDR  P(FDP>a)   power  effort full-auto
+HLCL           0.0352     0.030   0.726   0.363     0.299
+ItemLTT        0.0096     0.010   0.102   0.911     0.089
+HSC            0.0262     0.000   0.661   0.425     0.160
+ConfLabel      0.0192     0.020   0.160   0.861     0.139
+PerField-LTT   0.0242     0.000   0.573   0.502     0.000
+DepthBH        0.0354     0.000   0.697   0.389     0.134
+Conf>=0.9      0.0315     0.000   0.708   0.381     0.226
+
+alpha=0.1 (R=100)
+method            FDR  P(FDP>a)   power  effort full-auto
+HLCL           0.0820     0.050   0.923   0.148     0.690
+ItemLTT        0.0826     0.050   0.783   0.277     0.723
+HSC            0.0494     0.000   0.820   0.269     0.437
+ConfLabel      0.0472     0.000   0.506   0.550     0.450
+PerField-LTT   0.0494     0.000   0.742   0.339     0.141
+DepthBH        0.0676     0.000   0.866   0.213     0.449
+Conf>=0.9      0.0315     0.000   0.708   0.381     0.226
+exit=0

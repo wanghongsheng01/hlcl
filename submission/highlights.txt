@@ -1,0 +1,5 @@
+- Labels are accepted per node, not per item, under a certified error bound.
+- Accepted labels always form an ancestor-closed prefix of the predicted path.
+- Learn-then-test certifies one threshold per depth; tests chosen on held-out data.
+- The cheapest certified threshold is deployed under an explicit review-cost model.
+- Validated on four public taxonomies (depth 2-4), two LLM annotators, 100 splits.
