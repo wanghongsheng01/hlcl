@@ -72,9 +72,9 @@ def main():
     ax[0, 0].set_ylabel("power (correct labels accepted)")
     ax[1, 0].set_ylabel("human effort")
     h, l = ax[0, 0].get_legend_handles_labels()
-    fig.legend(h, l, loc="lower center", ncol=4, frameon=False, bbox_to_anchor=(0.5, -0.02))
-    fig.tight_layout(rect=(0, 0.06, 1, 1))
-    fig.savefig(OUT / "fig_power_alpha.pdf")
+    fig.tight_layout(rect=(0, 0.09, 1, 1))
+    fig.legend(h, l, loc="lower center", ncol=4, frameon=False, bbox_to_anchor=(0.5, 0.0))
+    fig.savefig(OUT / "fig_power_alpha.pdf", bbox_inches="tight", pad_inches=0.02)
 
     fig, ax = plt.subplots(1, 5, figsize=(7.4, 2.2), sharey=True)
     for j, (title, k) in enumerate(SETTINGS):
@@ -87,9 +87,9 @@ def main():
         ax[j].set_ylim(-0.03, 1.03)
     ax[0].set_ylabel(r"share of splits with FDP $>\alpha$")
     h, l = ax[0].get_legend_handles_labels()
-    fig.legend(h, l, loc="lower center", ncol=4, frameon=False, bbox_to_anchor=(0.5, -0.06))
-    fig.tight_layout(rect=(0, 0.18, 1, 1))
-    fig.savefig(OUT / "fig_validity.pdf")
+    fig.tight_layout(rect=(0, 0.22, 1, 1))
+    fig.legend(h, l, loc="lower center", ncol=4, frameon=False, bbox_to_anchor=(0.5, 0.0))
+    fig.savefig(OUT / "fig_validity.pdf", bbox_inches="tight", pad_inches=0.02)
     print("wrote", OUT)
 
 
