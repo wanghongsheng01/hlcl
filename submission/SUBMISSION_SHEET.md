@@ -12,12 +12,12 @@ Label-Level Hierarchical Selective Acceptance of LLM Annotations with Certified 
 
 ## 3. Authors (in order)
 1. Hongsheng Wang (corresponding author)
-   - College of Computer Science and Technology, Zhejiang University, Hangzhou, China
+   - College of Computer Science and Technology, Zhejiang University, 866 Yuhangtang Road, Xihu District, Hangzhou, 310058, Zhejiang, China
    - Loctek Ergonomic Technology Corp., China
    - wanghongsheng@zju.edu.cn
 2. Fei Wu
-   - College of Computer Science and Technology, Zhejiang University, Hangzhou, China
-   - (e-mail: to be filled in by the authors)
+   - College of Computer Science and Technology, Zhejiang University, 866 Yuhangtang Road, Xihu District, Hangzhou, 310058, Zhejiang, China
+   - wufei@zju.edu.cn
 
 ## 4. Abstract (243 words, plain text; numbers as in the PDF)
 See abstract_plain.txt (paste that file verbatim).
