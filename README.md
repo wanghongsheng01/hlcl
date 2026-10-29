@@ -13,7 +13,7 @@ Acceptance of LLM Annotations with Certified Error Control*.
 | `code/annotate.py` | the LLM annotation script (OpenAI-compatible API) that produced the cache |
 | `code/datasets_local.py` | loaders for the four corpora with the fixed 3,000-item subsample (seed 2026) |
 | `code/make_tables.py`, `code/make_figures.py` | regenerate every table, figure and number in the paper |
-| `data/llm_cache/*.jsonl` | all cached LLM responses (five caches) (item index, sample index, raw JSON answer) |
+| `data/llm_cache/*.jsonl` | all cached LLM responses (six caches: annotator A `deepseek-chat` on four corpora; annotators B `claude-haiku-4-5` and C `gpt-5.6-luna` on the Blurb collection; k = 5, temperature 1.0) (item index, sample index, raw JSON answer) |
 | `results/v9_*.json` | per-split results for every method, dataset, annotator and alpha (Item-cert. fixed-test variants merged in) |
 | `results/v9item_*.json` | Item-cert. under each fixed test, on the same splits; merged by `code/merge_item.py` |
 | `code/build_amazon.py` | builds the four-level Amazon subset (see `data/amazon/README.md`) |

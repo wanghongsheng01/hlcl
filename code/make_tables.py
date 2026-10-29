@@ -25,7 +25,8 @@ VER = sys.argv[1] if len(sys.argv) > 1 else "v9"
 DELTA = 0.1
 
 SETTINGS = [("dbpedia", "DBPedia (A)"), ("wos", "WOS-46985 (A)"),
-            ("bgc", "Blurb (A)"), ("bgc_haiku", "Blurb (B)"), ("amazon", "Amazon (A)")]
+            ("bgc", "Blurb (A)"), ("bgc_haiku", "Blurb (B)"), ("bgc_gpt", "Blurb (C)"),
+            ("amazon", "Amazon (A)")]
 CERTIFIED = ["ItemBest", "HSC", "PerField-LTT"]     # high-probability certificates
 MAIN = ["HLCL", "ItemBest", "HSC", "PerField-LTT", "ConfLabel", "DepthBH", "Conf>=0.9"]
 ITEM_VARIANTS = ["ItemLTT", "ItemLTT-wsr", "ItemLTT-iut"]

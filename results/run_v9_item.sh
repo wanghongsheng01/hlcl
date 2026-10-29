@@ -7,3 +7,4 @@ run v9item_dbpedia   --dataset dbpedia --tag dbpedia_deepseek_default_k5_t1.0 --
 run v9item_wos       --dataset wos --tag wos_deepseek_default_k5_t1.0 --R 100 --alphas 0.1,0.15,0.2,0.3 --levels 8
 run v9item_bgc       --dataset bgc --tag bgc_deepseek_default_k5_t1.0 --R 100 --alphas 0.02,0.05,0.1,0.15 --levels 8
 run v9item_bgc_haiku --dataset bgc --tag bgc_alt_claude-haiku-4-5_k5_t1.0 --R 100 --alphas 0.02,0.05,0.1,0.15 --levels 8
+run v9item_bgc_gpt --dataset bgc --tag bgc_alt_gpt-5.6-luna_k5_t1.0 --R 100 --alphas 0.02,0.05,0.1,0.15 --levels 8

@@ -14,3 +14,5 @@ run v9_bgc_haiku --dataset bgc --tag bgc_alt_claude-haiku-4-5_k5_t1.0 --R 100 --
 for c0 in 0 1; do run v9_bgc_c0_$c0 --dataset bgc --tag bgc_deepseek_default_k5_t1.0 --R 100 --alphas 0.05,0.1 --levels 8 --c0 $c0 --light; done
 for nc in 300 600; do run v9_bgc_ncal$nc --dataset bgc --tag bgc_deepseek_default_k5_t1.0 --R 100 --alphas 0.05,0.1 --levels 8 --ncal $nc --light; done
 for d in 0.05 0.2; do run v9_bgc_delta$d --dataset bgc --tag bgc_deepseek_default_k5_t1.0 --R 100 --alphas 0.05,0.1 --levels 8 --delta $d --light; done
+# third annotator (OpenAI gpt-5.6-luna), added in the ESWA revision
+run v9_bgc_gpt   --dataset bgc --tag bgc_alt_gpt-5.6-luna_k5_t1.0 --R 100 --alphas 0.02,0.05,0.1,0.15 --levels 8
