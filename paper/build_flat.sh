@@ -4,7 +4,7 @@
 set -e
 cd "$(dirname "$0")"
 rm -rf build && mkdir build
-cp manuscript.tex references.bib elsarticle.cls elsarticle-num.bst build/
+cp manuscript.tex supplementary.tex references.bib elsarticle.cls elsarticle-num.bst build/
 cp tables/*.tex build/
 for n in 1 2 3 4 5; do cp "figures/Figure_$n.pdf" "build/Fig$n.pdf"; done
 echo "flat source in paper/build/"

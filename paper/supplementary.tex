@@ -1,0 +1,132 @@
+%% Supplementary material for the Knowledge-Based Systems submission.
+%% Compile with pdflatex; uses the same macro files as manuscript.tex.
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\renewcommand{\thetable}{S\arabic{table}}
+
+\newcommand{\hlcl}{\textup{\textsc{HLCL}}}
+\newcommand{\fdr}{\mathrm{mFDR}}
+
+\input{numbers}
+\input{itemcert}
+\input{holm}
+\input{fdpratio}
+\input{perbaseline}
+\input{supp}
+
+\title{Supplementary material for\\``Certified label-level selective prediction for hierarchical outputs, with an application to LLM annotation''}
+\author{Hongsheng Wang and Fei Wu}
+\date{}
+
+\begin{document}
+\maketitle
+
+These tables complement Sections~3 and~6 of the main text; table and section
+numbers without the prefix S refer to the main text. All tables in this
+supplement except Table~\ref{tab:popcheck} use the splits of
+Table~3 of the main text. Tables~\ref{tab:depth}, \ref{tab:popcheck}
+and~\ref{tab:hypac}--\ref{tab:annotshift} come from a rerun of the deployed rules
+from the cached responses on the machine used for this revision, which can differ
+from the released runs in single splits (Section~5.4 of the main text).
+
+\begin{table}[!tbp]
+\centering
+\footnotesize
+\caption{Error and power of \hlcl{} by depth, mean over 100 splits. $q_d/\alpha$
+is the error among the labels accepted at depth $d$ divided by $\alpha$ (--: no
+acceptance at that depth); power is the share of correct labels of each depth
+that are accepted; stored is the error of all stored labels when a reviewer keeps
+the accepted prefix and completes the path, divided by $\alpha$. $q_d$ is
+averaged over the splits with at least one acceptance at depth $d$ and is noisy
+where power is near zero.}
+\label{tab:depth}
+\input{depth_table}
+\end{table}
+
+\begin{table}[!tbp]
+\centering
+\footnotesize
+\caption{Direct check of the guarantee. The 3,000 items of each setting are
+treated as the population; in each of 100 draws, fit and calibration samples are
+drawn from them with replacement, and the exact mFDR of the deployed rule is
+computed on all 3,000 items. The table gives the share of draws in which it
+exceeds $\alpha$; for \hlcl{}, Item-cert.\ (automatic test choice) and
+Per-field, the guarantee requires at most $\delta=10\%$.}
+\label{tab:popcheck}
+\input{popcheck_table}
+\end{table}
+
+\begin{table}[!tbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Mean realized label-level error divided by $\alpha$ over 100 splits.
+All methods are compared at the same nominal $\alpha$, but they use the error
+budget to different degrees.}
+\label{tab:realized}
+\input{realized_table}
+\end{table}
+
+\begin{table}[!tbp]
+\centering
+\footnotesize
+\caption{Paired differences between the tied variant, which decides per label
+with one threshold shared by all depths, and Item-cert.$^\ast$, with
+Nadeau--Bengio-corrected 95\% intervals over 100 splits. Bold marks significant
+differences in favor of the tied variant.}
+\label{tab:tied}
+\input{tied_table}
+\end{table}
+
+\begin{table}[!tbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{HyPAC adapted to one model and a person, against \hlcl{}, over 100
+splits. viol.: share of splits whose label-level error exceeded $\alpha$
+($^\dagger$: more than $\delta=10\%$); error$/\alpha$: wrong over accepted labels,
+summed over the splits, divided by $\alpha$; the next two columns give the mean
+effort; the last column gives the paired effort difference with
+Nadeau--Bengio-corrected 95\% intervals.}
+\label{tab:hypac}
+\input{hypac_table}
+\end{table}
+
+\begin{table}[!tbp]
+\centering
+\footnotesize
+\caption{Effort difference \hlcl{} $-$ Item-cert.$^\ast$ under the default cost
+model, under fine-heavy weights $\omega_d\propto d$ and under $c_0=2$, for the
+same deployed rules, with Nadeau--Bengio-corrected 95\% intervals. Bold marks
+significant differences in favor of \hlcl{}.}
+\label{tab:costsens}
+\input{costsens_table}
+\end{table}
+
+\begin{table}[!tbp]
+\centering
+\footnotesize
+\caption{\hlcl{} under label shift, with the deployed rules of the 100 splits
+and no recalibration. The first two columns are for the regular test split; the
+last two are for its items in the level-1 classes whose consensus accuracy on the
+fit split is below the median. Columns as in Table~\ref{tab:hypac}.}
+\label{tab:shift}
+\input{shift_table}
+\end{table}
+
+\begin{table}[!tbp]
+\centering
+\footnotesize
+\caption{\hlcl{} under a change of annotator on the Blurb collection: the rule
+fitted and calibrated on the outputs of the first annotator is applied to the
+second annotator's outputs for the same test items, without recalibration.
+Columns as in Table~\ref{tab:hypac}.}
+\label{tab:annotshift}
+\input{annotshift_table}
+\end{table}
+
+\end{document}

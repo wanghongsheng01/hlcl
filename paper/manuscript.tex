@@ -534,7 +534,7 @@ certified event, which is at most $D\alpha$ (\ref{app:proofs}). If the
 reviewer may overturn accepted labels, the stored error is at most
 $\E[W(\lambda)]/D\le\fdr(\lambda)$ for full predicted paths, but the cost model
 does not charge for overturning. In our runs the stored error stayed below
-$\alpha$ (at most \stat{s@stored@max}$\,\alpha$; Table~\ref{tab:depth}). The parameters $c_0$ and
+$\alpha$ (at most \stat{s@stored@max}$\,\alpha$; Table~S1 in the Supplementary material). The parameters $c_0$ and
 $\omega_d$ are configurable and should be set from the review interface. The
 guarantee does not depend on them, and on the Blurb collection \hlcl{} remains
 the cheapest certified method over the range of $c_0$ that we tested
@@ -1075,7 +1075,7 @@ lies below zero. It \emph{loses} if the interval lies above zero, and it \emph{t
 The interval uses the normal quantile 1.96; with the $t_{99}$ quantile (1.984),
 two wins, both on WOS-46985 (against Item-cert.$^\ast$ at $\alpha=0.2$ and
 Depth-BH at $\alpha=0.3$), would become ties, as would the win under $c_0=2$ on
-the Blurb collection with annotator B at $\alpha=0.05$ (Table~\ref{tab:costsens});
+the Blurb collection with annotator B at $\alpha=0.05$ (Table~S6 in the Supplementary material);
 no other classification changes. We write paired differences as the mean $\pm$ the
 half-width of this interval. Because \stat{s@nsettings} settings are compared, we also report
 how many wins and losses survive a Holm adjustment over the settings. Across
@@ -1171,7 +1171,7 @@ times, and computed the exact mFDR of each deployed rule on all 3,000 items. The
 share of draws in which it exceeded $\alpha$ was at most
 \stat{s@pop@HLCL@max} for \hlcl{}, \stat{s@pop@ItemLTT@max} for Item-cert.\ and
 \stat{s@pop@PerField-LTT@max} for Per-field, all within $\delta$
-(Table~\ref{tab:popcheck} in \ref{app:supp}). For HSC, whose
+(Table~S2 in the Supplementary material). For HSC, whose
 certificate concerns the item-level error over all items, the label-level mFDR
 exceeded $\alpha$ in up to \stat{s@pop@HSC@max} of draws, on WOS-46985, in line
 with the test-split results below. On average, the realized error of \hlcl{} was between
@@ -1181,7 +1181,7 @@ reach different realized errors at the same nominal $\alpha$ (median
 \stat{s@ratio@HLCL@med}$\,\alpha$ for \hlcl{} against
 \stat{s@ratio@ItemBest@med}$\,\alpha$, \stat{s@ratio@HSC@med}$\,\alpha$ and
 \stat{s@ratio@PerField-LTT@med}$\,\alpha$ for the three certified baselines;
-Table~\ref{tab:realized}), so part of the lower effort of \hlcl{} reflects a
+Table~S3 in the Supplementary material), so part of the lower effort of \hlcl{} reflects a
 less conservative use of the same error budget. All effort comparisons below
 are at equal nominal $\alpha$, not at equal realized error. Item-cert.\ and Per-field exceeded $\alpha$ in at most
 \stat{s@maxviol@ItemBest} and \stat{s@maxviol@PerField-LTT} of splits,
@@ -1209,7 +1209,7 @@ control other quantities or nothing, were not on target in
 \paragraph{Error by depth}
 The guarantee bounds the error pooled over levels, and coarse labels are easier,
 so the pooled ratio can hide a higher error at the finest level.
-Table~\ref{tab:depth} reports the error among the accepted labels of each depth.
+Table~S1 reports the error among the accepted labels of each depth.
 At the finest level it reached up to \stat{s@depth@finalmax}$\,\alpha$, for
 example about $0.17$ on the Blurb collection at $\alpha=0.1$, while the first
 level stayed below $\alpha$ in every setting (at most $0.85\,\alpha$). An operator who needs the target at every
@@ -1239,7 +1239,7 @@ both rules accept almost every label, which is consistent with \eqref{eq:saving}
 To separate the unit of decision from the per-depth thresholds, we compare the
 tied variant of Section~\ref{sec:res-abl}, which decides per label with one
 threshold shared by all depths and the automatic test, with Item-cert.$^\ast$
-(Table~\ref{tab:tied} in \ref{app:supp}). It accepted significantly more
+(Table~S4 in the Supplementary material). It accepted significantly more
 correct labels in \stat{s@tied@power@better} settings
 (\stat{s@tied@power@holm} after the Holm adjustment) and significantly fewer in
 \stat{s@tied@power@worse}, and it needed significantly less effort in
@@ -1253,7 +1253,7 @@ $\alpha\ge0.1$, all of the additional correct labels lie at the coarser levels,
 and the item-level rule accepts up to $0.02$ more of the finest-level labels,
 whereas at $\alpha=0.05$ \hlcl{} also accepts more finest-level labels, for
 example $0.47$ against $0.25$ of them with annotator A (\hlcl{} values in
-Table~\ref{tab:depth}).
+Table~S1).
 
 \begin{table}[!tbp]
 \centering
@@ -1314,8 +1314,7 @@ HyPAC, which bounds the annotation error over all items rather than among the
 accepted labels, needed no more effort than \hlcl{} in any setting, but its
 label-level error exceeded $\alpha$ in more than $\delta$ of the splits in all
 but \stat{s@hypac@on} settings, with a pooled error of up to
-\stat{s@hypac@ratiomax}$\,\alpha$ (Table~\ref{tab:hypac} in
-\ref{app:supp}). This is the difference between the two targets
+\stat{s@hypac@ratiomax}$\,\alpha$ (Table~S5 in the Supplementary material). This is the difference between the two targets
 discussed in Section~\ref{sec:related-routing}: at the same nominal level, a
 bound on the error over all items permits a higher error among the labels that
 are stored without review. In the \stat{s@hypac@on} settings in which HyPAC met
@@ -1516,7 +1515,7 @@ The equal weights $\omega_d$ assume that every level costs the same to decide,
 whereas a fine level with hundreds of options plausibly costs more. We evaluated
 the deployed rules of \hlcl{} and Item-cert.$^\ast$ under fine-heavy weights
 $\omega_d\propto d$ and under $c_0=2$ on the \stat{s@extra@nsettings} settings of
-Table~\ref{tab:costsens} in \ref{app:supp}. The number of settings in
+Table~S6 in the Supplementary material. The number of settings in
 which \hlcl{} is significantly cheaper falls from \stat{s@cost@effort@wins} to
 \stat{s@cost@eff_lin@wins} and \stat{s@cost@eff_c2@wins}, respectively, and it
 is significantly more expensive in none. In particular, the significant wins on
@@ -1578,7 +1577,7 @@ three classes on the Blurb collection; about 70\% and 76\% of the test items on
 DBPedia and Amazon). The realized error then exceeded
 $\alpha$ in more than $\delta$ of the splits in \stat{s@shift@hard@off} of the
 \stat{s@nsettings} settings, with a median pooled error of
-\stat{s@shift@hard@ratiomed}$\,\alpha$ (Table~\ref{tab:shift}); on DBPedia and Amazon, where the restricted test set is close to the full one,
+\stat{s@shift@hard@ratiomed}$\,\alpha$ (Table~S7 in the Supplementary material); on DBPedia and Amazon, where the restricted test set is close to the full one,
 the pooled error stayed below $\alpha$, although the share of splits above
 $\alpha$ exceeded $\delta$ in five of their eight settings. Second, under a
 change of annotator, the rule calibrated on the outputs of one LLM was applied
@@ -1588,7 +1587,7 @@ the outcome depended on the direction: applied to C, the rules of A exceeded
 $\alpha$ at $\alpha=0.05$ and $0.1$ (up to $1.52\,\alpha$), whereas the rules of
 C applied to A kept a pooled error below $\alpha$. The rules calibrated on B, the least accurate annotator, kept a pooled error
 below $\alpha$ on the other two, but exceeded $\alpha$ in 31\% and 39\% of the
-splits on C at $\alpha=0.02$ and $0.05$ (Table~\ref{tab:annotshift}). The certificate is therefore tied to the
+splits on C at $\alpha=0.02$ and $0.05$ (Table~S8 in the Supplementary material). The certificate is therefore tied to the
 distribution and the annotator on which it was computed. A deployment must
 recalibrate when either changes, and a random audit of fully reviewed items, as in
 Section~\ref{sec:method-system} and in the audit-based scheme of
@@ -1931,112 +1930,6 @@ Answer with JSON only: {"l1", "l2", "l3", "c1", "c2", "c3"} where c* is
 your probability (0-1) that the label at that level is correct.
 \end{verbatim}
 \end{footnotesize}
-
-\section{Supplementary results}
-\label{app:supp}
-\setcounter{table}{0}
-
-All tables in this appendix except Table~\ref{tab:popcheck} use the splits of
-Table~\ref{tab:main}. Tables~\ref{tab:depth}, \ref{tab:popcheck}
-and~\ref{tab:hypac}--\ref{tab:annotshift} come from a rerun of the deployed rules
-from the cached responses on the machine used for this revision, which can differ
-from the released runs in single splits (Section~\ref{sec:setup-impl}).
-
-\begin{table}[!tbp]
-\centering
-\footnotesize
-\caption{Error and power of \hlcl{} by depth, mean over 100 splits. $q_d/\alpha$
-is the error among the labels accepted at depth $d$ divided by $\alpha$ (--: no
-acceptance at that depth); power is the share of correct labels of each depth
-that are accepted; stored is the error of all stored labels when a reviewer keeps
-the accepted prefix and completes the path, divided by $\alpha$. $q_d$ is
-averaged over the splits with at least one acceptance at depth $d$ and is noisy
-where power is near zero.}
-\label{tab:depth}
-\input{depth_table}
-\end{table}
-
-\begin{table}[!tbp]
-\centering
-\footnotesize
-\caption{Direct check of the guarantee. The 3,000 items of each setting are
-treated as the population; in each of 100 draws, fit and calibration samples are
-drawn from them with replacement, and the exact mFDR of the deployed rule is
-computed on all 3,000 items. The table gives the share of draws in which it
-exceeds $\alpha$; for \hlcl{}, Item-cert.\ (automatic test choice) and
-Per-field, the guarantee requires at most $\delta=10\%$.}
-\label{tab:popcheck}
-\input{popcheck_table}
-\end{table}
-
-\begin{table}[!tbp]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\caption{Mean realized label-level error divided by $\alpha$ over 100 splits.
-All methods are compared at the same nominal $\alpha$, but they use the error
-budget to different degrees.}
-\label{tab:realized}
-\input{realized_table}
-\end{table}
-
-\begin{table}[!tbp]
-\centering
-\footnotesize
-\caption{Paired differences between the tied variant, which decides per label
-with one threshold shared by all depths, and Item-cert.$^\ast$, with
-Nadeau--Bengio-corrected 95\% intervals over 100 splits. Bold marks significant
-differences in favor of the tied variant.}
-\label{tab:tied}
-\input{tied_table}
-\end{table}
-
-\begin{table}[!tbp]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{4pt}
-\caption{HyPAC adapted to one model and a person, against \hlcl{}, over 100
-splits. viol.: share of splits whose label-level error exceeded $\alpha$
-($^\dagger$: more than $\delta=10\%$); error$/\alpha$: wrong over accepted labels,
-summed over the splits, divided by $\alpha$; the next two columns give the mean
-effort; the last column gives the paired effort difference with
-Nadeau--Bengio-corrected 95\% intervals.}
-\label{tab:hypac}
-\input{hypac_table}
-\end{table}
-
-\begin{table}[!tbp]
-\centering
-\footnotesize
-\caption{Effort difference \hlcl{} $-$ Item-cert.$^\ast$ under the default cost
-model, under fine-heavy weights $\omega_d\propto d$ and under $c_0=2$, for the
-same deployed rules, with Nadeau--Bengio-corrected 95\% intervals. Bold marks
-significant differences in favor of \hlcl{}.}
-\label{tab:costsens}
-\input{costsens_table}
-\end{table}
-
-\begin{table}[!tbp]
-\centering
-\footnotesize
-\caption{\hlcl{} under label shift, with the deployed rules of the 100 splits
-and no recalibration. The first two columns are for the regular test split; the
-last two are for its items in the level-1 classes whose consensus accuracy on the
-fit split is below the median. Columns as in Table~\ref{tab:hypac}.}
-\label{tab:shift}
-\input{shift_table}
-\end{table}
-
-\begin{table}[!tbp]
-\centering
-\footnotesize
-\caption{\hlcl{} under a change of annotator on the Blurb collection: the rule
-fitted and calibrated on the outputs of the first annotator is applied to the
-second annotator's outputs for the same test items, without recalibration.
-Columns as in Table~\ref{tab:hypac}.}
-\label{tab:annotshift}
-\input{annotshift_table}
-\end{table}
 
 \clearpage
 \bibliographystyle{elsarticle-num}
