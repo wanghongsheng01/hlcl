@@ -26,8 +26,9 @@
 \begin{document}
 \maketitle
 
-These tables complement Sections~3 and~6 of the main text; table and section
-numbers without the prefix S refer to the main text. All tables in this
+These tables complement Sections~3 and~6 of the main text, and the last section
+gives the annotation prompt of Section~5.1; table and section numbers without
+the prefix S refer to the main text. All tables in this
 supplement except Table~\ref{tab:popcheck} use the splits of
 Table~3 of the main text. Tables~\ref{tab:depth}, \ref{tab:popcheck}
 and~\ref{tab:hypac}--\ref{tab:annotshift} come from a rerun of the deployed rules
@@ -129,5 +130,31 @@ Columns as in Table~\ref{tab:hypac}.}
 \label{tab:annotshift}
 \input{annotshift_table}
 \end{table}
+
+\section*{Annotation prompt}
+
+Every item was annotated with the following prompt, sent as a single user
+message with temperature 1.0, at most 160 output tokens and JSON output mode
+where the API supports it. \texttt{\{taxonomy\}} lists the taxonomy with one line per deepest parent, in
+the form ``\texttt{a > b > leaf1 | leaf2 | ...}''; \texttt{\{text\}} is the item
+text truncated to 1,500 characters. The prompt is shown for a three-level
+taxonomy; for two and four levels, the header and the JSON keys have two or four
+levels. The full taxonomy is included in every prompt.
+
+\begin{footnotesize}
+\begin{verbatim}
+Classify the text into exactly one path of the taxonomy below
+(coarse to fine). Use label names exactly as written.
+
+TAXONOMY (each line: level-1 > level-2 > level-3 options):
+{taxonomy}
+
+TEXT:
+{text}
+
+Answer with JSON only: {"l1", "l2", "l3", "c1", "c2", "c3"} where c* is
+your probability (0-1) that the label at that level is correct.
+\end{verbatim}
+\end{footnotesize}
 
 \end{document}
