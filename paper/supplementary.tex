@@ -26,14 +26,15 @@
 \begin{document}
 \maketitle
 
-These tables complement Sections~3 and~6 of the main text, and the last section
-gives the annotation prompt of Section~5.1; table and section numbers without
+These tables complement Sections~3 and~6 of the main text, and the last two
+sections give implementation notes for Section~5 and the annotation prompt of
+Section~5.1; table and section numbers without
 the prefix S refer to the main text. All tables in this
 supplement except Table~\ref{tab:popcheck} use the splits of
 Table~3 of the main text. Tables~\ref{tab:depth}, \ref{tab:popcheck}
 and~\ref{tab:hypac}--\ref{tab:annotshift} come from a rerun of the deployed rules
 from the cached responses on the machine used for this revision, which can differ
-from the released runs in single splits (Section~5.4 of the main text).
+from the released runs in single splits (see the implementation notes below).
 
 \begin{table}[H]
 \centering
@@ -130,6 +131,41 @@ Columns as in Table~\ref{tab:hypac}.}
 \label{tab:annotshift}
 \input{annotshift_table}
 \end{table}
+
+\section*{Implementation notes}
+
+\paragraph{Label matching (Section~5.1 of the main text).} Labels are compared
+after mapping typographic apostrophes to plain ones (annotator B writes
+\emph{Children's Books} where the taxonomy has
+\emph{Children\textquoteright s Books}).
+
+\paragraph{HyPAC adaptation (Section~5.2 of the main text).} HyPAC selects the
+cheapest threshold whose upper confidence bound is at most the target, relying
+on the monotonicity of the risk. We instead test the 64 item-score candidates
+of Item-cert.\ in a fixed sequence from conservative to permissive, which does
+not need that monotonicity, with a one-sided betting $p$-value (HyPAC reports a
+betting bound as its best finite-sample variant), and deploy the most
+permissive, hence cheapest, certified threshold.
+
+\paragraph{Development of the method (Section~5.4 of the main text).} The
+values of $\alpha$ were set per corpus from the consensus accuracy of Table~2
+of the main text, which was computed on all 3,000 items. The method and the
+grids of $\alpha$ were developed iteratively on the same corpora with
+annotators A and B, and the grid of the Blurb collection was changed once, from
+$\{0.05,0.1,0.15,0.2\}$ to $\{0.02,0.05,0.1,0.15\}$, after early runs. The
+candidate order and the test choice use the in-sample scores of the fit split,
+which we preferred to a cross-fitted variant in a pilot; both are functions of
+the fit split only and do not affect validity. Annotator C was added after the
+code was frozen, so its four settings are a check on data not used in
+development.
+
+\paragraph{Reruns on other machines (Section~5.4 of the main text).} Rerunning
+the experiments on a different machine can change single splits through
+floating-point ties among candidate $p$-values; in our reruns of all
+\stat{s@nsettings} settings, 48 of 2,400 splits of \hlcl{} changed, mean effort
+changed by at most $0.008$ (DBPedia at $\alpha=0.02$) and by at most $0.002$
+elsewhere, and the significance counts of Section~6.2 of the main text were
+unchanged.
 
 \section*{Annotation prompt}
 

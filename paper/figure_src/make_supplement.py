@@ -267,6 +267,7 @@ if shift:
     (OUT / "annotshift_table.tex").write_text(table4(
         "Change & $\\alpha$ & viol. & error$/\\alpha$", an_rows, "lccc"))
     put("s@hypac@on", hy_on)
+    put("s@hypac@off", len(hy_ratio) - hy_on)
     put("s@hypac@wins", hy_win)
     put("s@hypac@losses", hy_loss)
     put("s@hypac@ratiomax", f2(max(hy_ratio)))
