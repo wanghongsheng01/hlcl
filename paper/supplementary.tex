@@ -4,6 +4,7 @@
 \usepackage[a4paper,margin=2.5cm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
+\usepackage{float}
 \usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
 \renewcommand{\thetable}{S\arabic{table}}
@@ -33,7 +34,7 @@ and~\ref{tab:hypac}--\ref{tab:annotshift} come from a rerun of the deployed rule
 from the cached responses on the machine used for this revision, which can differ
 from the released runs in single splits (Section~5.4 of the main text).
 
-\begin{table}[!tbp]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Error and power of \hlcl{} by depth, mean over 100 splits. $q_d/\alpha$
@@ -47,7 +48,7 @@ where power is near zero.}
 \input{depth_table}
 \end{table}
 
-\begin{table}[!tbp]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Direct check of the guarantee. The 3,000 items of each setting are
@@ -60,7 +61,7 @@ Per-field, the guarantee requires at most $\delta=10\%$.}
 \input{popcheck_table}
 \end{table}
 
-\begin{table}[!tbp]
+\begin{table}[H]
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -71,7 +72,7 @@ budget to different degrees.}
 \input{realized_table}
 \end{table}
 
-\begin{table}[!tbp]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Paired differences between the tied variant, which decides per label
@@ -82,7 +83,7 @@ differences in favor of the tied variant.}
 \input{tied_table}
 \end{table}
 
-\begin{table}[!tbp]
+\begin{table}[H]
 \centering
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -96,7 +97,7 @@ Nadeau--Bengio-corrected 95\% intervals.}
 \input{hypac_table}
 \end{table}
 
-\begin{table}[!tbp]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Effort difference \hlcl{} $-$ Item-cert.$^\ast$ under the default cost
@@ -107,7 +108,7 @@ significant differences in favor of \hlcl{}.}
 \input{costsens_table}
 \end{table}
 
-\begin{table}[!tbp]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{\hlcl{} under label shift, with the deployed rules of the 100 splits
@@ -118,7 +119,7 @@ fit split is below the median. Columns as in Table~\ref{tab:hypac}.}
 \input{shift_table}
 \end{table}
 
-\begin{table}[!tbp]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{\hlcl{} under a change of annotator on the Blurb collection: the rule
