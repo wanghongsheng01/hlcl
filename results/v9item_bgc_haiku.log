@@ -1,4 +1,6 @@
-{'n_items': 3000, 'depth': 3, 'invalid_samples': 1, 'n_nodes': 9000, 'acc_by_depth': [0.8913333333333333, 0.7353333333333333, 0.5893333333333334]}
+/Users/loctek/Desktop/改投 DKE-HLCL2ESWA/hlcl-code/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+{'n_items': 3000, 'depth': 3, 'invalid_samples': 1, 'n_nodes': 9000, 'acc_by_depth': [0.9606666666666667, 0.7546666666666667, 0.6046666666666667]}
   split 10/100
   split 20/100
   split 30/100
@@ -17,16 +19,16 @@ ItemLTT-iut    0.0000     0.000   0.000   1.000     0.000
 
 alpha=0.05 (R=100)
 method            FDR  P(FDP>a)   power  effort full-auto
-ItemLTT-wsr    0.0115     0.030   0.101   0.922     0.078
+ItemLTT-wsr    0.0113     0.030   0.095   0.924     0.076
 ItemLTT-iut    0.0000     0.000   0.000   1.000     0.000
 
 alpha=0.1 (R=100)
 method            FDR  P(FDP>a)   power  effort full-auto
-ItemLTT-wsr    0.0819     0.070   0.660   0.469     0.531
-ItemLTT-iut    0.0046     0.000   0.023   0.982     0.018
+ItemLTT-wsr    0.0817     0.060   0.633   0.467     0.533
+ItemLTT-iut    0.0048     0.000   0.021   0.984     0.016
 
 alpha=0.15 (R=100)
 method            FDR  P(FDP>a)   power  effort full-auto
-ItemLTT-wsr    0.1306     0.100   0.844   0.284     0.716
-ItemLTT-iut    0.0438     0.000   0.393   0.695     0.305
+ItemLTT-wsr    0.1259     0.040   0.808   0.286     0.714
+ItemLTT-iut    0.0434     0.000   0.378   0.693     0.307
 exit=0

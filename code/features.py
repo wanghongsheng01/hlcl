@@ -40,14 +40,33 @@ def _fanout(tree, prefix):
     return len(node) if node else 1
 
 
+def _norm(label: str) -> str:
+    """Typographic apostrophes as plain ones: one annotator writes "Children's"
+    where the taxonomy has "Children’s"; both spellings name the same label."""
+    return label.replace("\u2019", "'").replace("\u2018", "'")
+
+
+def _norm_tree(node):
+    if isinstance(node, dict):
+        return {_norm(k): _norm_tree(v) for k, v in node.items()}
+    if isinstance(node, (list, set, tuple)):
+        return [_norm(v) for v in node]
+    return node
+
+
 def build(dataset: str, tag: str, n: int, k: int):
     items, tree = load_dataset_items(dataset, n)
+    tree = _norm_tree(tree)
+    for it in items:
+        it["gold"] = [_norm(g) for g in it["gold"]]
     depth = len(items[0]["gold"])
     samples: dict[int, list] = {}
     for line in (CACHE / f"{tag}.jsonl").read_text().splitlines():
         r = json.loads(line)
         if r["s"] < k:
-            samples.setdefault(r["id"], []).append(parse(r["resp"], depth))
+            p = parse(r["resp"], depth)
+            samples.setdefault(r["id"], []).append(
+                None if p is None else ([_norm(x) for x in p[0]], p[1]))
 
     rows, item, dep, correct, parent = [], [], [], [], []
     n_invalid = 0

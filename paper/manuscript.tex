@@ -1,29 +1,24 @@
-%% Manuscript for Machine Learning (Springer).
-%% Numbers in the text are macros in numbers.tex and related files, generated from the
-%% released per-split result files.
-\documentclass[pdflatex,sn-basic]{sn-jnl}
+%% Manuscript for Knowledge-Based Systems (Elsevier, single anonymized review).
+%% Numbers in the text are macros in tables/*.tex, generated from the released
+%% per-split result files.
+\documentclass[preprint,12pt]{elsarticle}
 
-\usepackage{graphicx}
-\usepackage{multirow}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{amsthm}
-\usepackage[title]{appendix}
-\usepackage{xcolor}
-\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{xcolor}
 \usepackage{algorithm}
-\usepackage{algorithmicx}
 \usepackage{algpseudocode}
 \usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
 
-\theoremstyle{thmstyleone}
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
-\theoremstyle{thmstylethree}
+\theoremstyle{definition}
 \newtheorem{definition}{Definition}
-
-\raggedbottom
 
 \newcommand{\hlcl}{\textup{\textsc{HLCL}}}
 \newcommand{\fdr}{\mathrm{mFDR}}
@@ -38,17 +33,34 @@
 \input{perbaseline}
 \input{supp}
 
+\journal{Knowledge-Based Systems}
+
 \begin{document}
 
-\title[Certified label-level selective prediction]{Certified label-level selective prediction for hierarchical outputs, with an application to LLM annotation}
+\begin{frontmatter}
 
-\author*[1,2]{\fnm{Hongsheng} \sur{Wang}}\email{wanghongsheng@zju.edu.cn}
-\author[1]{\fnm{Fei} \sur{Wu}}\email{wufei@zju.edu.cn}
+\title{Certified label-level selective prediction for hierarchical outputs, with an application to LLM annotation}
 
-\affil*[1]{\orgdiv{College of Computer Science and Technology}, \orgname{Zhejiang University}, \orgaddress{\street{866 Yuhangtang Road, Xihu District}, \city{Hangzhou}, \postcode{310058}, \state{Zhejiang}, \country{China}}}
-\affil[2]{\orgname{Loctek Ergonomic Technology Corp.}, \orgaddress{\street{No. 436 Xueshi Road, Shounan Subdistrict, Yinzhou District}, \city{Ningbo}, \postcode{315100}, \state{Zhejiang}, \country{China}}}
+\author[zju,loctek]{Hongsheng Wang\corref{cor1}}
+\ead{wanghongsheng@zju.edu.cn}
+\author[zju]{Fei Wu}
+\ead{wufei@zju.edu.cn}
+\cortext[cor1]{Corresponding author.}
 
-\abstract{%
+\affiliation[zju]{organization={College of Computer Science and Technology, Zhejiang University},
+  addressline={866 Yuhangtang Road, Xihu District},
+  city={Hangzhou},
+  postcode={310058},
+  state={Zhejiang},
+  country={China}}
+\affiliation[loctek]{organization={Loctek Ergonomic Technology Corp.},
+  addressline={No. 436 Xueshi Road, Shounan Subdistrict, Yinzhou District},
+  city={Ningbo},
+  postcode={315100},
+  state={Zhejiang},
+  country={China}}
+
+\begin{abstract}
 %ABSTRACT-BEGIN
 Selective prediction usually accepts or defers a prediction as a whole. For hierarchical outputs, such as taxonomy paths, the
 natural unit of risk is a single label, and the labels of one output are
@@ -58,8 +70,8 @@ an ancestor-closed prefix of each predicted path with one threshold per depth,
 certifies the thresholds by learn-then-test and deploys the certified threshold
 with the lowest modeled review effort. Because the label-level marginal false
 discovery rate can be written as one bounded loss per output, \hlcl{}
-guarantees, with probability at least {\unboldmath$1-\delta$}, that it does not
-exceed a target {\unboldmath$\alpha$} for independent and identically
+guarantees, with probability at least $1-\delta$, that it does not
+exceed a target $\alpha$ for independent and identically
 distributed outputs, without a model of the dependence between labels. As it is also
 a weighted average of per-depth rates, a second, exact test exists. We evaluated \hlcl{} on
 four public taxonomies of depth two to four annotated by three large language
@@ -74,11 +86,19 @@ strongest such baseline in each setting, it was significantly lower in
 \stat{s@wins} settings, higher in \stat{s@losses} and not significantly
 different in \stat{s@ties}.
 %ABSTRACT-END
-}
+\end{abstract}
 
-\keywords{selective prediction, risk control, hierarchical classification, multiple testing, large language models, data annotation}
+\begin{keyword}
+selective prediction
+\sep risk control
+\sep hierarchical classification
+\sep multiple testing
+\sep large language models
+\sep data annotation
+\end{keyword}
 
-\maketitle
+\end{frontmatter}
+
 
 \section{Introduction}
 \label{sec:intro}
@@ -110,7 +130,7 @@ $p$-values and controls the false discovery rate (FDR) of the items whose machin
 labels are kept. Probably approximately correct (PAC) labeling
 \citep{candes2026pac} chooses an uncertainty threshold such that, with high
 probability, the average error over the whole dataset is small, where the labels
-supplied by experts count as correct. HyPAC (Zeng et al. 2026, arXiv:2602.02550)
+supplied by experts count as correct. HyPAC \citep{zeng2026hypac}
 calibrates two thresholds to route between a fast model, a slower model and a
 person. Selective classification
 \citep{geifman2017selective} bounds the risk of the accepted predictions. All of
@@ -138,7 +158,7 @@ dependent, and a hierarchy adds further dependence between a node and its
 descendants. A procedure that treats labels as exchangeable units has no
 guarantee for the label-level ratio. Moreover, fitting a high-capacity score on
 the data used to set its threshold has been shown empirically to break
-selective-risk control in document extraction (Gurram 2026, arXiv:2608.14639). The second difficulty is structural. A
+selective-risk control in document extraction \citep{gurram2026perfield}. The second difficulty is structural. A
 label-level rule that ignores the taxonomy may accept a fine label while rejecting
 its parent, and the resulting label set is not a path in the taxonomy.
 
@@ -150,7 +170,10 @@ threshold with the lowest estimated review effort. A reviewer receives the
 certified prefix and decides only the remaining levels (Fig.~\ref{fig:overview}).
 The method needs only a predicted path and a score per node, so it applies to any
 hierarchical classifier; LLM annotation is the application in which we evaluate
-it.
+it. In an annotation system, \hlcl{} is the decision component between the
+annotator and the label store (Fig.~\ref{fig:overview}(a)): it writes the
+certified labels directly, routes the rest to a reviewer, and keeps a policy
+that can be audited and recalibrated.
 
 \begin{figure}[!tbp]
 \centering
@@ -192,10 +215,11 @@ The main contributions of this paper are as follows:
   population level and for one threshold, that prefix acceptance dominates item
   acceptance in accepted labels and cost, and we give a sufficient condition
   under which the error target carries over (Proposition~\ref{prop:prefix}).
-  Proofs are in Appendix~\ref{app:proofs}.
+  Proofs are in \ref{app:proofs}.
   \item We evaluate \hlcl{} on four public hierarchical corpora of depth two to
   four, with three LLM annotators from different model families and 100 random
-  splits per setting, against six baselines, with ablations under a fixed test
+  splits per setting, against six baselines and an adaptation of HyPAC, with
+  ablations under a fixed test
     statistic and a sensitivity analysis. \hlcl{} met the target in every setting,
   and a direct check of the guarantee on a known population confirmed it. In the
   settings in which each certified baseline met the target, the mean modeled
@@ -245,14 +269,14 @@ Approach & Unit of decision & Respects taxonomy & Guarantee & Models human effor
 Uncertainty-guided allocation \citep{li2023coannotating} & item & no & none & budget trade-off \\ \addlinespace[2pt]
 Conformal labeling \citep{huang2025selective} & item & no & expected FDR & no \\ \addlinespace[2pt]
 PAC labeling \citep{candes2026pac} & item & no & high-prob.\ dataset error & label count or per-source cost \\ \addlinespace[2pt]
-HyPAC (Zeng et al. 2026) & item & no & high-prob.\ dataset error & tokens or API price \\ \addlinespace[2pt]
+HyPAC \citep{zeng2026hypac} & item & no & high-prob.\ dataset error & tokens or API price \\ \addlinespace[2pt]
 Conformal alignment \citep{gui2024conformalalignment} & item & no & expected FDR & no \\ \addlinespace[2pt]
 Trust or escalate \citep{jung2025trust} & item & no & high-prob.\ agreement & no \\ \addlinespace[2pt]
 QUORUM routing \citep{quorum2026} & item & no & none on label error & budget \\ \addlinespace[2pt]
 Selective classification \citep{geifman2017selective} & item & no & high-prob.\ risk & no \\ \addlinespace[2pt]
 Hierarchical selective cls.\ \citep{goren2024hierarchical} & item (back-off) & yes & high-prob.\ accuracy within $\pm\epsilon$ of target & no \\ \addlinespace[2pt]
-Per-field risk control (Gurram 2026) & field & no & high-prob.\ per group of fields & no \\ \addlinespace[2pt]
-Hierarchical conformal (den Hengst et al. 2025) & prediction set & yes & coverage & no \\ \addlinespace[2pt]
+Per-field risk control \citep{gurram2026perfield} & field & no & high-prob.\ per group of fields & no \\ \addlinespace[2pt]
+Hierarchical conformal \citep{denhengst2025hierarchical} & prediction set & yes & coverage & no \\ \addlinespace[2pt]
 Conformal structured prediction \citep{zhang2025conformal} & prediction set & yes (DAG) & marginal or PAC coverage & no \\ \addlinespace[2pt]
 \hlcl{} (this work) & label (node) & yes & high-prob.\ label-level mFDR & yes \\
 \bottomrule
@@ -283,22 +307,26 @@ cut, and the cut must be justified on labeled data. \hlcl{} does not need a
 calibrated score for its guarantee to hold.
 
 \subsection{Selective annotation and routing with guarantees}
+\label{sec:related-routing}
 \citet{huang2025selective} propose conformal labeling. It computes a conformal
 $p$-value per item against the calibration items that the model mislabeled and
 then applies the Benjamini--Hochberg procedure \citep{benjamini1995fdr} with a
 correction factor $(n+1)/(n_0+1)$, where $n_0$ is the number of mislabeled calibration
 items, at target $\alpha$, which controls the expected FDR of the set of items whose
-machine labels are used. \citet{gui2024conformalalignment} apply the same
+machine labels are used. \citet{zhang2026cared} drop the exchangeability
+assumption: a uniformly random audit sample of each incoming batch is reviewed by
+experts and used to calibrate later decisions, which gives long-run control of
+the cumulative error under distribution shift, with decisions per item.
+\citet{gui2024conformalalignment} apply the same
 construction to decide when the output of a foundation model can be trusted, and
 \citet{jin2023selection} develop the underlying theory of selection with
-conformal $p$-values. All three select whole items and assume one label per
+conformal $p$-values. All four select whole items and assume one label per
 item. \hlcl{} differs from them in the unit of decision, in enforcing ancestor
 closure and in the form of the guarantee.
 
 \citet{candes2026pac} choose one uncertainty threshold so that, with probability at
 least $1-\delta$, the average labeling error over the whole dataset is at most
-$\epsilon$, where items sent to experts count as correct. HyPAC (Zeng et al. 2026,
-arXiv:2602.02550) calibrates two thresholds to route items between two model
+$\epsilon$, where items sent to experts count as correct. HyPAC \citep{zeng2026hypac} calibrates two thresholds to route items between two model
 tiers and a person and minimizes annotation cost (tokens or API price) under a
 high-probability guarantee on the population error, which is asymptotic with the
 bound used in its main experiments. Both are the closest in spirit to our high-probability
@@ -352,7 +380,7 @@ Conformal prediction gives distribution-free guarantees under exchangeability
 \citep{vovk2022algorithmic,angelopoulos2023gentle}. \citet{mohri2024language} remove claims from a
 generated text until the remainder is certified as factual. This back-off is
 close in spirit to our ancestor closure, but its unit is a claim rather than a
-taxonomy node, and it has no budget. Gurram (2026, arXiv:2608.14639) decides per
+taxonomy node, and it has no budget. \citet{gurram2026perfield} decides per
 extracted field and controls the selective risk among accepted fields, pooled
 or within groups of fields, with guarantees that range from expected risk to
 per-group high-probability bounds. Field-level decisions are the granularity we
@@ -362,13 +390,12 @@ fields as flat units and does not accept a coarse unit while routing a fine
 one, and its document-level tier bounds a per-document average error, whereas our
 tests bound the pooled ratio under i.i.d.\ items. We adapt its field-i.i.d.\ tier
 as a baseline. Learn-then-test with per-field thresholds has also been used for
-financial documents (Jin et al. 2026, arXiv:2609.20110), and FDR-controlling
-calibration for accepting single entities in medical extraction (Shrestha and
-Kim 2026, arXiv:2603.00924); both treat fields or entities as flat units.
-Hierarchical group-conditional risk control (Salem et al. 2026,
-arXiv:2607.24562) also tests every node of a tree with a Bonferroni correction,
+financial documents \citep{jin2026stp}, and FDR-controlling
+calibration for accepting single entities in medical extraction
+\citep{shrestha2026medical}; both treat fields or entities as flat units.
+Hierarchical group-conditional risk control \citep{salem2026hgcrc} also tests every node of a tree with a Bonferroni correction,
 but its tree organizes groups of inputs, not the labels of one output. Hierarchical conformal classification
-(den Hengst et al. 2025, arXiv:2508.13288; \citealp{mortier2026conformal}),
+\citep{denhengst2025hierarchical,mortier2026conformal},
 conformal structured prediction over directed acyclic graphs
 \citep{zhang2025conformal} and tree-based conformal prediction for multi-label
 data \citep{tyagi2023multilabel} return mixed-level prediction sets with
@@ -464,7 +491,7 @@ guarantees that the \emph{deployed} rule meets it with probability $1-\delta$.
 Theirs averages the realized proportion over repetitions. PAC labeling
 \citep{candes2026pac} also holds with high probability, but its target is the
 realized error on one fixed dataset, with probability over the labeling algorithm and
-with expert labels counted as correct. HyPAC (Zeng et al. 2026)
+with expert labels counted as correct. HyPAC \citep{zeng2026hypac}
 bounds the corresponding population risk, with probability over the calibration
 sample. Neither of these targets implies a bound on $\fdr(\lambda)$, and
 $\fdr(\lambda)$ does not bound the error of the stored labels in general
@@ -503,7 +530,7 @@ keeps the accepted prefix, which is what the cost model charges for, stores a
 wrong label at every level below a wrong accepted node. The error rate of all
 stored labels can therefore exceed $\fdr(\lambda)$. It is at most
 $\Pr\{W(\lambda)\ge1\}\le\E[W(\lambda)]\le\alpha\,\E[A(\lambda)]$ on the
-certified event, which is at most $D\alpha$ (Appendix~\ref{app:proofs}). If the
+certified event, which is at most $D\alpha$ (\ref{app:proofs}). If the
 reviewer may overturn accepted labels, the stored error is at most
 $\E[W(\lambda)]/D\le\fdr(\lambda)$ for full predicted paths, but the cost model
 does not charge for overturning. In our runs the stored error stayed below
@@ -583,7 +610,7 @@ $s\in(0,1)$. It is fitted on a \emph{fit split} that is disjoint from the
 calibration and test data. Unlike the vote, $s$ is not monotone along a path,
 because a child can face weaker competition than its parent. Ancestor closure is
 therefore a real constraint on the rule. Keeping the fit split separate prevents
-the score-refit leakage described by Gurram (2026).
+the score-refit leakage described by \citet{gurram2026perfield}.
 
 \subsection{Acceptance rule}
 \label{sec:method-rule}
@@ -596,7 +623,7 @@ accepts the depth-$d$ node of item $i$ when
 \end{equation}
 where $s_{i,e}$ is the score of the node of item $i$ at depth $e$. A depth with no predicted node has $A_{i,d}=0$. The accepted
 set of every item is a prefix of its predicted path and is hence
-ancestor-closed (Appendix~\ref{app:proofs}). A reviewer of a partially accepted
+ancestor-closed (\ref{app:proofs}). A reviewer of a partially accepted
 item receives the certified prefix and decides only the remaining levels, as
 assumed by the cost model \eqref{eq:effort}.
 
@@ -676,7 +703,7 @@ nothing and is trivially admissible. By the intersection--union principle \citep
   \label{eq:iut}
 \end{equation}
 is a valid $p$-value for $H_\lambda$ without any multiplicity correction
-(Appendix~\ref{app:proofs}). The test depends on the score only through which
+(\ref{app:proofs}). The test depends on the score only through which
 nodes are accepted. It is coarser than the pooled test, since it requires every
 depth to meet $\alpha$. However, it uses exact tails and remains usable when $\alpha n$ is small. Its rejection also certifies
 the stronger statement $q_d\le\alpha$ for every depth that can accept.
@@ -700,7 +727,7 @@ threshold. The pooled test with bets in $[0,0.5/(1-\alpha)]$ can reject only if
 $a\ge2(1-\alpha)D\log(1/\delta)/\alpha$.
 \end{proposition}
 
-The proof is in Appendix~\ref{app:proofs}. Both are necessary, not sufficient,
+The proof is in \ref{app:proofs}. Both are necessary, not sufficient,
 conditions and assume that no errors are observed; observed errors raise the
 requirement. At
 $\delta=0.1$ and $D=3$, $\alpha=0.02$ requires $n_d\ge114$ at every active
@@ -723,7 +750,7 @@ certified candidate $\lambda$ satisfies $\fdr(\lambda)\le\alpha$. In particular,
 the deployed $\hat\lambda$ satisfies \eqref{eq:guarantee}.
 \end{theorem}
 
-The proof is given in Appendix~\ref{app:proofs}. The guarantee concerns the
+The proof is given in \ref{app:proofs}. The guarantee concerns the
 deployed rule. Any selection among the certified candidates, including the
 effort criterion below, preserves it, because all of them are covered
 simultaneously. When the depth-wise test is used, the same argument applies to
@@ -794,7 +821,7 @@ satisfies $\fdr\le\alpha$, accepts at least as many correct nodes and costs no
 more. If $\rho>\alpha$, the prefix rule at the same threshold can exceed $\alpha$.
 \end{proposition}
 
-The proof is given in Appendix~\ref{app:proofs}. The result is a population
+The proof is given in \ref{app:proofs}. The result is a population
 statement about one threshold. It does not say that \hlcl{} beats the item rule on a
 given sample, because each rule is certified on its own and neither family
 contains the other. The saving \eqref{eq:saving} is the work avoided on partial items and does
@@ -859,9 +886,10 @@ The experiments answer five research questions:
   and in which regimes does label-level acceptance pay off most
   (Sections~\ref{sec:res-effort} and \ref{sec:res-nohelp})?
   \item[RQ4] Which components drive the gains (Section~\ref{sec:res-abl})?
-  \item[RQ5] How sensitive are the results to the review overhead, the
-  calibration size, $\delta$ and the annotator
-  (Sections~\ref{sec:res-sens} and~\ref{sec:res-annot})?
+    \item[RQ5] How sensitive are the results to the review overhead, the
+  calibration size, $\delta$ and the annotator, and how does the guarantee
+  behave under distribution shift
+  (Sections~\ref{sec:res-sens}--\ref{sec:res-shift})?
 \end{description}
 
 \subsection{Data and annotators}
@@ -891,11 +919,13 @@ We use four public hierarchical corpora whose fine levels differ in difficulty.
 From each corpus we draw $3{,}000$ items with a fixed seed. The taxonomy
 offered to the annotator is known in advance: the official hierarchy for the
 Blurb collection and the label paths of the whole corpus for the other three.
-All gold paths and all consensus paths in our samples have full depth. Annotator A
+All gold paths and all consensus paths in our samples have full depth. Labels are compared after mapping typographic apostrophes to plain ones,
+because annotator B writes, for example, \emph{Children's Books} where the
+taxonomy has \emph{Children\textquoteright s Books}. Annotator A
 (\texttt{deepseek-chat}) labels all four corpora. Annotators B
 (\texttt{claude-haiku-4-5}) and C (\texttt{gpt-5.6-luna}), which come from two
 further model families, label the Blurb collection again. Each item is queried $k=5$ times at temperature $1.0$ with the prompt given in
-Appendix~\ref{app:prompt}. All 90,000 responses are cached and released, so every number below can
+\ref{app:prompt}. All 90,000 responses are cached and released, so every number below can
 be reproduced without API access. Four responses could not be parsed: three
 blank ones on WOS-46985 and one truncated one from annotator B. They count as
 missing samples. On Amazon, three responses left every level empty, and they
@@ -948,7 +978,7 @@ All methods use the same learned node score $s$ and the same splits.
   most specific nodes. Its guarantee concerns a different quantity from ours. We
   report it because it is a recent published hierarchical back-off method.
   \item \textbf{Per-field selective risk control} (Per-field)
-    (Gurram 2026, arXiv:2608.14639), adapted. Each depth is one group of fields
+    \citep{gurram2026perfield}, adapted. Each depth is one group of fields
   with one threshold, certified with an exact binomial tail at level $\delta/D$,
   which is the simultaneous form of that work's field-i.i.d.\ tier. The original
   tests 15 quantile candidates with a mix of Holm and fixed-sequence testing; we
@@ -969,8 +999,23 @@ All methods use the same learned node score $s$ and the same splits.
   each depth. The nodes of one depth are i.i.d.\ across items, so this method
   controls the expected FDP at each depth. It gives no high-probability
   statement and no direct statement about the pooled ratio.
-  \item \textbf{Fixed threshold} ($s\ge0.9$). This is the common practitioner
+    \item \textbf{Fixed threshold} ($s\ge0.9$). This is the common practitioner
   rule, and it carries no guarantee.
+  \item \textbf{HyPAC} \citep{zeng2026hypac}, adapted to one model and a person.
+  An item is labeled by the LLM if its weakest node score is at least $u$ and by
+  a reviewer otherwise, and every calibration item is labeled. The risk is the
+  population annotation error over all items, with reviewed items counted as
+  correct and an accepted item contributing its share of wrong labels instead of
+  a 0-1 loss. HyPAC selects the cheapest threshold whose upper confidence bound
+  is at most the target and justifies this by the monotonicity of the risk; we
+  implement the selection as fixed-sequence testing from conservative to
+  permissive over the 64 item-score candidates of Item-cert., which does not need
+  that monotonicity, with a one-sided betting $p$-value (HyPAC reports a betting
+  bound as its best finite-sample variant), and deploy the most permissive
+  certified threshold, which has the lowest cost. HyPAC also carries a
+  high-probability certificate, but for the error over all items, so we report it
+  separately and do not count it among the certified baselines
+  (Section~\ref{sec:res-effort}).
 \end{itemize}
 Item-cert., HSC and Per-field carry high-probability certificates, and we call
 them the \emph{certified baselines}. Item-conf.\ and Depth-BH carry
@@ -1029,7 +1074,9 @@ splits, $n_{\mathrm{test}}=1200$ and $n_{\mathrm{train}}=1800$. \hlcl{}
 lies below zero. It \emph{loses} if the interval lies above zero, and it \emph{ties} otherwise.
 The interval uses the normal quantile 1.96; with the $t_{99}$ quantile (1.984),
 two wins, both on WOS-46985 (against Item-cert.$^\ast$ at $\alpha=0.2$ and
-Depth-BH at $\alpha=0.3$), would become ties, and no other classification changes. We write paired differences as the mean $\pm$ the
+Depth-BH at $\alpha=0.3$), would become ties, as would the win under $c_0=2$ on
+the Blurb collection with annotator B at $\alpha=0.05$ (Table~\ref{tab:costsens});
+no other classification changes. We write paired differences as the mean $\pm$ the
 half-width of this interval. Because \stat{s@nsettings} settings are compared, we also report
 how many wins and losses survive a Holm adjustment over the settings. Across
 settings, we summarize the certified methods by their average ranks, the
@@ -1060,17 +1107,15 @@ The pooled betting test uses the plug-in bet of Section~\ref{sec:method-cert};
 the depth-wise test uses exact binomial tails. All methods are implemented in
 Python with NumPy and scikit-learn. The code, the cached LLM responses, the
 per-split result files and the scripts that regenerate every table and figure
-are publicly available (see the Declarations). Rerunning the experiments on a
+are publicly available (see the Data availability statement). Rerunning the experiments on a
 different machine can change single splits through floating-point ties among
-candidate $p$-values; in our reruns of all 24 settings, 55 of 2,400 splits of
+candidate $p$-values; in our reruns of all 24 settings, 48 of 2,400 splits of
 \hlcl{} changed, mean effort changed by at most $0.008$ (DBPedia at
 $\alpha=0.02$) and by at most $0.002$ elsewhere, and the significance counts of
 Section~\ref{sec:res-unit} were unchanged.
 
-Apart from the annotators under study, we used Claude (Anthropic) as a coding and
-writing assistant for the analysis and plotting scripts and for drafting and
-editing parts of the text. The authors reviewed the code and the text, and all
-results were produced by running the released code.
+Apart from the annotators under study, generative AI was used as a coding and
+writing assistant; see the declaration at the end of the paper.
 
 \section{Results}
 \label{sec:results}
@@ -1078,7 +1123,7 @@ results were produced by running the released code.
 \begin{table}[!tbp]
 \centering
 \footnotesize
-\setlength{\tabcolsep}{2.5pt}
+\setlength{\tabcolsep}{2pt}
 \caption{Effort/power over 100 splits; lower effort is better. The first four
 method columns carry high-probability certificates. Item-conf.\ and Depth-BH
 control an expectation, and $s\ge0.9$ has no guarantee. Item-cert.$^\ast$ is
@@ -1126,7 +1171,7 @@ times, and computed the exact mFDR of each deployed rule on all 3,000 items. The
 share of draws in which it exceeded $\alpha$ was at most
 \stat{s@pop@HLCL@max} for \hlcl{}, \stat{s@pop@ItemLTT@max} for Item-cert.\ and
 \stat{s@pop@PerField-LTT@max} for Per-field, all within $\delta$
-(Table~\ref{tab:popcheck} in Appendix~\ref{app:supp}). For HSC, whose
+(Table~\ref{tab:popcheck} in \ref{app:supp}). For HSC, whose
 certificate concerns the item-level error over all items, the label-level mFDR
 exceeded $\alpha$ in up to \stat{s@pop@HSC@max} of draws, on WOS-46985, in line
 with the test-split results below. On average, the realized error of \hlcl{} was between
@@ -1194,7 +1239,7 @@ both rules accept almost every label, which is consistent with \eqref{eq:saving}
 To separate the unit of decision from the per-depth thresholds, we compare the
 tied variant of Section~\ref{sec:res-abl}, which decides per label with one
 threshold shared by all depths and the automatic test, with Item-cert.$^\ast$
-(Table~\ref{tab:tied} in Appendix~\ref{app:supp}). It accepted significantly more
+(Table~\ref{tab:tied} in \ref{app:supp}). It accepted significantly more
 correct labels in \stat{s@tied@power@better} settings
 (\stat{s@tied@power@holm} after the Holm adjustment) and significantly fewer in
 \stat{s@tied@power@worse}, and it needed significantly less effort in
@@ -1205,7 +1250,7 @@ of DBPedia, the Blurb collection and Amazon, the tied variant and Item-cert.$^\a
 both accept almost nothing, and the gains of \hlcl{} there come from per-depth
 thresholds. Accepted labels are not equally valuable. On the Blurb collection at
 $\alpha\ge0.1$, all of the additional correct labels lie at the coarser levels,
-and the item-level rule accepts up to $0.06$ more of the finest-level labels,
+and the item-level rule accepts up to $0.02$ more of the finest-level labels,
 whereas at $\alpha=0.05$ \hlcl{} also accepts more finest-level labels, for
 example $0.47$ against $0.25$ of them with annotator A (\hlcl{} values in
 Table~\ref{tab:depth}).
@@ -1265,6 +1310,18 @@ in which it met the target. Against the expected-value baselines and the fixed
 threshold, the reductions are larger in the settings in which these methods met
 the target.
 
+HyPAC, which bounds the annotation error over all items rather than among the
+accepted labels, needed no more effort than \hlcl{} in any setting, but its
+label-level error exceeded $\alpha$ in more than $\delta$ of the splits in all
+but \stat{s@hypac@on} settings, with a pooled error of up to
+\stat{s@hypac@ratiomax}$\,\alpha$ (Table~\ref{tab:hypac} in
+\ref{app:supp}). This is the difference between the two targets
+discussed in Section~\ref{sec:related-routing}: at the same nominal level, a
+bound on the error over all items permits a higher error among the labels that
+are stored without review. In the \stat{s@hypac@on} settings in which HyPAC met
+the label-level target, the efforts of the two methods did not differ
+significantly.
+
 \begin{figure}[!tbp]
 \centering
 \includegraphics[width=\textwidth]{Fig4}
@@ -1288,8 +1345,7 @@ Item-cert.$^\ast$, \stat{s@fr@rank@HSC} for HSC and
 With the \stat{s@fr@bN} corpus--annotator pairs as units and their mean effort,
 the average ranks are \stat{s@fr@brank@HLCL}, \stat{s@fr@brank@ItemBest},
 \stat{s@fr@brank@HSC} and \stat{s@fr@brank@PerField-LTT} (Friedman test,
-$p\stat{s@fr@bp}$); with six units the critical difference is 1.91, and only the
-gap to Per-field exceeds it. We read the rank analysis as a summary that
+$p\stat{s@fr@bp}$); with six units the critical difference is 1.91, and the gaps to Item-cert.$^\ast$ and Per-field exceed it. We read the rank analysis as a summary that
 supports the per-setting intervals, because the settings of one pair are not
 independent.
 
@@ -1322,8 +1378,8 @@ ancestor-closed output.
 \label{sec:res-nohelp}
 The results show where the advantage of label-level acceptance is largest and
 where it narrows. It is largest at moderate $\alpha$, when the coarse levels
-are reliable and the fine levels are not: on the Blurb collection at
-$\alpha=0.05$ and $0.1$ with annotators A and C and on Amazon at $\alpha=0.05$,
+are reliable and the fine levels are not: on the Blurb collection at $\alpha=0.05$ and $0.1$ with annotators A and C and
+at $\alpha=0.1$ and $0.15$ with annotator B, and on Amazon at $\alpha=0.05$,
 \hlcl{} is significantly cheaper even than the strongest certified baseline of
 the setting. It narrows in two regimes. First, at the
 smallest $\alpha$ of DBPedia, the Blurb collection and Amazon, the calibration
@@ -1460,7 +1516,7 @@ The equal weights $\omega_d$ assume that every level costs the same to decide,
 whereas a fine level with hundreds of options plausibly costs more. We evaluated
 the deployed rules of \hlcl{} and Item-cert.$^\ast$ under fine-heavy weights
 $\omega_d\propto d$ and under $c_0=2$ on the \stat{s@extra@nsettings} settings of
-Table~\ref{tab:costsens} in Appendix~\ref{app:supp}. The number of settings in
+Table~\ref{tab:costsens} in \ref{app:supp}. The number of settings in
 which \hlcl{} is significantly cheaper falls from \stat{s@cost@effort@wins} to
 \stat{s@cost@eff_lin@wins} and \stat{s@cost@eff_c2@wins}, respectively, and it
 is significantly more expensive in none. In particular, the significant wins on
@@ -1497,15 +1553,47 @@ significantly cheaper than the strongest certified baseline at $\alpha=0.05$
 and $0.1$; with annotator C, its effort was \res{bgc_gpt}{0.05}{HLCL}{effort}
 against \res{bgc_gpt}{0.05}{HSC}{effort} for HSC at $\alpha=0.05$ and
 \res{bgc_gpt}{0.1}{HLCL}{effort} against \res{bgc_gpt}{0.1}{ItemBest}{effort}
-for Item-cert.$^\ast$ at $\alpha=0.1$. With the weaker annotator B, \hlcl{} has
-the lowest mean effort among the certified methods on target at all four values of
-$\alpha$, by one to three points, but none of these differences is significant
-after the Nadeau--Bengio correction (Fig.~\ref{fig:forest}). Annotator C was
+for Item-cert.$^\ast$ at $\alpha=0.1$. With the weaker annotator B, \hlcl{} was significantly cheaper than the
+strongest certified baseline at $\alpha=0.1$ and $0.15$
+(\dif{bgc_haiku}{0.1}{ItemBest}{effort} and \dif{bgc_haiku}{0.15}{ItemBest}{effort}
+against Item-cert.$^\ast$). At $\alpha=0.05$ it was cheaper than HSC but not
+significantly (\res{bgc_haiku}{0.05}{HLCL}{effort} against
+\res{bgc_haiku}{0.05}{HSC}{effort}), and at $\alpha=0.02$ HSC was slightly, not
+significantly, cheaper (\res{bgc_haiku}{0.02}{HSC}{effort} against
+\res{bgc_haiku}{0.02}{HLCL}{effort}; Fig.~\ref{fig:forest}). Annotator C was
 added after the code was frozen, and its results agree with those of annotator
-A. The advantage of
-label-level acceptance thus depends on the annotator through the accuracy of
-its coarse levels, which guideline 1 in Section~\ref{sec:disc-guidelines} asks
-to measure first.
+A. The advantage of label-level acceptance thus depends on the annotator: with
+the less accurate annotator B it appears at larger $\alpha$, which is why
+guideline 1 in Section~\ref{sec:disc-guidelines} asks to measure the per-depth
+accuracy first.
+
+\subsection{Distribution shift (RQ5)}
+\label{sec:res-shift}
+
+The guarantee assumes that deployment items come from the calibration
+distribution. We examined two departures from this assumption, using the
+deployed rules of the 100 splits and no recalibration. First, under a label shift, the test items were restricted to the level-1
+classes whose consensus accuracy on the fit split was below the median (one of
+three classes on the Blurb collection; about 70\% and 76\% of the test items on
+DBPedia and Amazon). The realized error then exceeded
+$\alpha$ in more than $\delta$ of the splits in \stat{s@shift@hard@off} of the
+\stat{s@nsettings} settings, with a median pooled error of
+\stat{s@shift@hard@ratiomed}$\,\alpha$ (Table~\ref{tab:shift}); on DBPedia and Amazon, where the restricted test set is close to the full one,
+the pooled error stayed below $\alpha$, although the share of splits above
+$\alpha$ exceeded $\delta$ in five of their eight settings. Second, under a
+change of annotator, the rule calibrated on the outputs of one LLM was applied
+to the outputs of another LLM for the same Blurb items, as happens when a
+deployed model is replaced. A rule calibrated on annotator A and applied to the weaker annotator B exceeded $\alpha$ in 89\% to 100\% of the splits, with a pooled error of \stat{s@shift@AB@min}--\stat{s@shift@AB@max}$\,\alpha$, and a rule calibrated on C exceeded it on B at $\alpha=0.1$ and $0.15$ (up to $1.48\,\alpha$). Between the two stronger annotators
+the outcome depended on the direction: applied to C, the rules of A exceeded
+$\alpha$ at $\alpha=0.05$ and $0.1$ (up to $1.52\,\alpha$), whereas the rules of
+C applied to A kept a pooled error below $\alpha$. The rules calibrated on B, the least accurate annotator, kept a pooled error
+below $\alpha$ on the other two, but exceeded $\alpha$ in 31\% and 39\% of the
+splits on C at $\alpha=0.02$ and $0.05$ (Table~\ref{tab:annotshift}). The certificate is therefore tied to the
+distribution and the annotator on which it was computed. A deployment must
+recalibrate when either changes, and a random audit of fully reviewed items, as in
+Section~\ref{sec:method-system} and in the audit-based scheme of
+\citet{zhang2026cared}, is needed to detect such changes; audit-based calibration as in
+\citet{zhang2026cared} can also recalibrate continuously.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -1563,7 +1651,7 @@ calibration items.}
 \toprule
 Regime & Recommended rule & Evidence \\
 \midrule
-Coarse levels reliable, fine levels not; moderate $\alpha$ & \hlcl{} with the pooled test & Blurb (A, C) at $\alpha=0.05$--$0.1$, Amazon at $\alpha=0.05$; Tables~\ref{tab:main} and~\ref{tab:abl}, Fig.~\ref{fig:forest} \\ \addlinespace[2pt]
+Coarse levels reliable, fine levels not; moderate $\alpha$ & \hlcl{} with the pooled test & Blurb (A, C) at $\alpha=0.05$--$0.1$, Blurb (B) at $\alpha=0.1$--$0.15$, Amazon at $\alpha=0.05$; Tables~\ref{tab:main} and~\ref{tab:abl}, Fig.~\ref{fig:forest} \\ \addlinespace[2pt]
 $\alpha$ close to the error rate of the finest level & \hlcl{} or the item-level rule with the same certificate; both accept almost every label & DBPedia at $\alpha\ge0.05$, Table~\ref{tab:main} \\ \addlinespace[2pt]
 Very small $\alpha$ ($\alpha\,n_{\mathrm{cal}}\le24$) & \hlcl{} with the depth-wise test, or more calibration data; HSC if an item-level accuracy target over all items suffices & smallest $\alpha$ on DBPedia, Blurb and Amazon, Table~\ref{tab:abl} \\ \addlinespace[2pt]
 A bound is needed at every level & \hlcl{} with the depth-wise test only & Section~\ref{sec:method-cert} \\ \addlinespace[2pt]
@@ -1614,9 +1702,12 @@ No labeled data & label a calibration sample first; a fixed threshold gives no g
 \label{sec:disc-limits}
 \emph{Distribution shift.} As for any calibration-based method, the guarantee
 assumes that calibration and deployment items come from the same distribution.
-Items that share a source should be treated at the level of the independent
-unit (Gurram 2026). The random audit of Section~\ref{sec:method-system}
-can detect drift and trigger recalibration; we did not evaluate this loop.
+Section~\ref{sec:res-shift} shows that a shift towards hard classes or a weaker
+annotator broke the target in most settings. Items that share a source should be treated at the
+level of the independent unit \citep{gurram2026perfield}. The random audit of
+Section~\ref{sec:method-system} can detect drift and trigger recalibration, and
+audit-based calibration \citep{zhang2026cared} gives guarantees without
+exchangeability; we did not evaluate this loop for \hlcl{}.
 
 \emph{Scope of the guarantee.} The guarantee bounds the long-run error rate of
 the labels accepted without review, pooled over levels. It does not bound the
@@ -1667,8 +1758,10 @@ keeps the accepted labels ancestor-closed, certifies per-depth thresholds with
 a learn-then-test procedure whose design choices are all fixed on held-out
 data, and deploys the cheapest certified threshold. On four public corpora of
 depth two to four with three LLM annotators, \hlcl{} met the target in all
-\stat{s@nsettings} settings, whereas \stat{s@inval@nbase} of the 6 baselines
-missed it in up to \stat{s@inval@max} settings. In the settings in which each
+\stat{s@nsettings} settings, whereas \stat{s@inval@nbase} of the six baselines of
+Table~\ref{tab:main} missed it in up to \stat{s@inval@max} settings, and the
+HyPAC adaptation, which bounds a different quantity, in all but
+\stat{s@hypac@on}. In the settings in which each
 certified baseline met the target, the mean modeled effort of \hlcl{} was
 \stat{s@pb@relmin}--\stat{s@pb@relmax}\% lower, and it had the best average rank
 among the certified methods. Against the strongest baseline chosen per setting
@@ -1690,22 +1783,25 @@ distribution shift between calibration and deployment, label-level procedures
 with expected-value guarantees, multi-path and DAG taxonomies, and a timed user
 study of review effort in a real annotation interface.
 
-\backmatter
 
-\section*{Statements and Declarations}
+\section*{CRediT authorship contribution statement}
+\textbf{Hongsheng Wang:} Conceptualization, Methodology, Software, Validation,
+Formal analysis, Investigation, Data curation, Writing -- original draft,
+Writing -- review \& editing, Visualization. \textbf{Fei Wu:} Supervision,
+Writing -- review \& editing.
 
-\bmhead{Funding}
-No external funding was received for conducting this study. The employer of the
-first author provided access to an LLM gateway (see Competing interests).
-
-\bmhead{Competing interests}
+\section*{Declaration of competing interest}
 Hongsheng Wang is employed by Loctek Ergonomic Technology Corp., whose e-mail
 annotation workload motivated this study. The company provided access to the LLM
 gateway through which annotator C was queried. It had no role in the design of the
 method, the choice of datasets, the analysis or the decision to publish, and no
 company data are used. Fei Wu declares no competing interests.
 
-\bmhead{Data and code availability}
+\section*{Funding}
+This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors. The employer of the
+first author provided access to an LLM gateway (see the Declaration of competing interest).
+
+\section*{Data availability}
 The four corpora are public: DBPedia classes \citep{dbpediaclasses2022data},
 released under CC0; WOS-46985 \citep{kowsari2018wosdata}; the Blurb Genre
 Collection \citep{bgc2019data}, released under CC BY-NC; and the Home \&
@@ -1717,16 +1813,15 @@ that regenerate every table and figure are available at
 \url{https://github.com/wanghongsheng01/hlcl} and archived at Zenodo
 (\url{https://doi.org/10.5281/zenodo.23762584}).
 
-\bmhead{Ethics approval and consent}
-Not applicable.
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+During the preparation of this work the authors used Claude (Anthropic) as a
+coding and writing assistant for the analysis and plotting scripts and for
+drafting and editing parts of the text. After using this tool, the authors
+reviewed and edited the content as needed and take full responsibility for the
+content of the published article. All results were produced by running the
+released code.
 
-\bmhead{Authors' contributions}
-Hongsheng Wang: conceptualization, methodology, software, validation, formal
-analysis, investigation, data curation, writing (original draft, review and
-editing), visualization. Fei Wu: supervision, writing (review and editing).
-
-\begin{appendices}
-
+\appendix
 \section{Proofs}
 \label{app:proofs}
 
@@ -1840,8 +1935,9 @@ your probability (0-1) that the label at that level is correct.
 \section{Supplementary results}
 \label{app:supp}
 
-All tables in this appendix use the splits of Table~\ref{tab:main}. Tables
-\ref{tab:depth}, \ref{tab:popcheck} and~\ref{tab:costsens} come from a rerun of the deployed rules
+All tables in this appendix except Table~\ref{tab:popcheck} use the splits of
+Table~\ref{tab:main}. Tables~\ref{tab:depth}, \ref{tab:popcheck}
+and~\ref{tab:hypac}--\ref{tab:annotshift} come from a rerun of the deployed rules
 from the cached responses on the machine used for this revision, which can differ
 from the released runs in single splits (Section~\ref{sec:setup-impl}).
 
@@ -1897,6 +1993,20 @@ differences in favor of the tied variant.}
 \begin{table}[!tbp]
 \centering
 \footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{HyPAC adapted to one model and a person, against \hlcl{}, over 100
+splits. viol.: share of splits whose label-level error exceeded $\alpha$
+($^\dagger$: more than $\delta=10\%$); error$/\alpha$: wrong over accepted labels,
+summed over the splits, divided by $\alpha$; the next two columns give the mean
+effort; the last column gives the paired effort difference with
+Nadeau--Bengio-corrected 95\% intervals.}
+\label{tab:hypac}
+\input{hypac_table}
+\end{table}
+
+\begin{table}[!tbp]
+\centering
+\footnotesize
 \caption{Effort difference \hlcl{} $-$ Item-cert.$^\ast$ under the default cost
 model, under fine-heavy weights $\omega_d\propto d$ and under $c_0=2$, for the
 same deployed rules, with Nadeau--Bengio-corrected 95\% intervals. Bold marks
@@ -1905,7 +2015,30 @@ significant differences in favor of \hlcl{}.}
 \input{costsens_table}
 \end{table}
 
-\end{appendices}
+\begin{table}[!tbp]
+\centering
+\footnotesize
+\caption{\hlcl{} under label shift, with the deployed rules of the 100 splits
+and no recalibration. The first two columns are for the regular test split; the
+last two are for its items in the level-1 classes whose consensus accuracy on the
+fit split is below the median. Columns as in Table~\ref{tab:hypac}.}
+\label{tab:shift}
+\input{shift_table}
+\end{table}
+
+\begin{table}[!tbp]
+\centering
+\footnotesize
+\caption{\hlcl{} under a change of annotator on the Blurb collection: the rule
+fitted and calibrated on the outputs of the first annotator is applied to the
+second annotator's outputs for the same test items, without recalibration.
+Columns as in Table~\ref{tab:hypac}.}
+\label{tab:annotshift}
+\input{annotshift_table}
+\end{table}
+
+\bibliographystyle{elsarticle-num}
+
 
 \bibliography{references}
 
