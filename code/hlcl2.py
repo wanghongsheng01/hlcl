@@ -126,7 +126,7 @@ def iut_binom_pvalue(A: np.ndarray, C: np.ndarray, alpha: float, lam: np.ndarray
 
 def calibrate(S, C, M, grid, alpha, delta=0.1, hier=True, order=None,
               objective="effort", w=None, tests=("wsr", "iut")):
-    """Learn-then-Test with the test statistic chosen by a pre-registered rule.
+    """Learn-then-Test with the test statistic chosen by a fixed rule on held-out data.
 
     Two statistics are valid for the same target {E[W] > alpha E[A]}: the pooled
     betting test ("wsr") and the depth-wise exact binomial intersection-union

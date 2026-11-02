@@ -1,103 +1,303 @@
-%% References for HLCL (DKE submission).
-%% Every entry was checked against the publisher page, the PMLR/JMLR page or the
-%% arXiv abstract page on 2026-10-16. Keys must match \cite commands in main.tex.
+%% References for the Machine Learning submission (author-year via sn-jnl and sn-basic).
+%% Entries were checked against Crossref, OpenAlex, the arXiv API or the publisher page.
 
-@misc{huang2025selective,
-  author        = {Huipeng Huang and Wenbo Liao and Huajun Xi and Hao Zeng and Mengchen Zhao and Hongxin Wei},
-  title         = {Model-agnostic Selective Labeling with Provable Statistical Guarantees},
-  year          = {2025},
-  eprint        = {2510.14581},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.LG},
-  note          = {Method: Conformal Labeling}
+%% ---------------------------------------------------------------- selective annotation
+@inproceedings{huang2025selective,
+  author    = {Huang, Huipeng and Liao, Wenbo and Xi, Huajun and Zeng, Hao and Zhao, Mengchen and Wei, Hongxin},
+  title     = {Provable Selective Auto-labeling with Reliability Guarantees},
+  booktitle = {Advances in Neural Information Processing Systems 39 (NeurIPS 2026)},
+  year      = {2026},
+  url       = {https://neurips.cc/virtual/2026/poster/154352}
+}
+
+@inproceedings{candes2026pac,
+  author    = {Cand\`es, Emmanuel J. and Ilyas, Andrew and Zrnic, Tijana},
+  title     = {Probably Approximately Correct Labels},
+  booktitle = {Proceedings of the 43rd International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {306},
+  pages     = {10984--11001},
+  year      = {2026},
+  url       = {https://proceedings.mlr.press/v306/candes26a.html}
+}
+
+@inproceedings{cheng2026multiexpert,
+  author    = {Cheng, Ming and Dai, Yusheng and Ke, Qiuhong and Chen, Zhaolin and Qu, Lizhen},
+  title     = {Multi-Expert Conformal Risk Control for Pairwise {LLM} Judging in Open-Ended Dialogue},
+  booktitle = {Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {1201--1215},
+  year      = {2026},
+  doi       = {10.18653/2026.emnlp-main.53}
 }
 
 @inproceedings{gui2024conformalalignment,
-  author    = {Yu Gui and Ying Jin and Zhimei Ren},
+  author    = {Gui, Yu and Jin, Ying and Ren, Zhimei},
   title     = {Conformal Alignment: Knowing When to Trust Foundation Models with Guarantees},
   booktitle = {Advances in Neural Information Processing Systems 37 (NeurIPS 2024)},
+  pages     = {73884--73919},
   year      = {2024},
-  note      = {arXiv:2405.10301}
+  doi       = {10.52202/079017-2350}
 }
 
 @article{jin2023selection,
-  author  = {Ying Jin and Emmanuel J. Cand\`es},
+  author  = {Jin, Ying and Cand\`es, Emmanuel J.},
   title   = {Selection by Prediction with Conformal p-values},
   journal = {Journal of Machine Learning Research},
   volume  = {24},
   number  = {244},
   pages   = {1--41},
-  year    = {2023}
+  year    = {2023},
+  url     = {https://jmlr.org/papers/v24/22-1176.html}
 }
 
 @inproceedings{jung2025trust,
-  author    = {Jaehun Jung and Faeze Brahman and Yejin Choi},
-  title     = {Trust or Escalate: LLM Judges with Provable Guarantees for Human Agreement},
+  author    = {Jung, Jaehun and Brahman, Faeze and Choi, Yejin},
+  title     = {Trust or Escalate: {LLM} Judges with Provable Guarantees for Human Agreement},
   booktitle = {International Conference on Learning Representations (ICLR 2025)},
   year      = {2025},
-  note      = {arXiv:2407.18370}
+  doi       = {10.48550/arXiv.2407.18370}
 }
 
-@misc{quorum2026,
-  author        = {Antonio Purificato and Maria Sofia Bucarelli and Andrea Bacciu and Amin Mantrach and Fabrizio Silvestri},
-  title         = {{QUORUM}: {QU}ality-Optimized Routing Using Multiple Annotators},
-  year          = {2026},
-  eprint        = {2608.27974},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.CL},
-  note          = {Code: \url{https://github.com/amazon-science/QUORUM}}
+@inproceedings{quorum2026,
+  author    = {Purificato, Antonio and Bucarelli, Maria Sofia and Bacciu, Andrea and Mantrach, Amin and Silvestri, Fabrizio},
+  title     = {{QUORUM}: {QU}ality-Optimized Routing Using Multiple annotators},
+  booktitle = {Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {26873--26890},
+  year      = {2026},
+  doi       = {10.18653/2026.emnlp-main.1172}
 }
 
 @inproceedings{mohri2024language,
-  author    = {Christopher Mohri and Tatsunori Hashimoto},
+  author    = {Mohri, Christopher and Hashimoto, Tatsunori},
   title     = {Language Models with Conformal Factuality Guarantees},
   booktitle = {Proceedings of the 41st International Conference on Machine Learning},
-  series    = {PMLR},
+  series    = {Proceedings of Machine Learning Research},
   volume    = {235},
   pages     = {36029--36047},
-  year      = {2024}
+  year      = {2024},
+  url       = {https://proceedings.mlr.press/v235/mohri24a.html}
 }
 
-@misc{perfield2026,
-  author        = {Bhaskar Gurram},
-  title         = {Valid Per-Field Selective Risk Control for Document Extraction: Three Failure Modes, a Validity Ladder, and When Conditioning Pays},
-  year          = {2026},
-  eprint        = {2608.14639},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.LG}
+%% ---------------------------------------------------------------- LLM annotation, human-AI collaboration
+@article{gilardi2023chatgpt,
+  author  = {Gilardi, Fabrizio and Alizadeh, Meysam and Kubli, Ma\"el},
+  title   = {{ChatGPT} Outperforms Crowd Workers for Text-Annotation Tasks},
+  journal = {Proceedings of the National Academy of Sciences},
+  volume  = {120},
+  number  = {30},
+  pages   = {Article e2305016120},
+  year    = {2023},
+  doi     = {10.1073/pnas.2305016120}
 }
 
-@misc{denhengst2025hierarchical,
-  author        = {Floris den Hengst and In\`es Blin and Majid Mohammadi and Syed Ihtesham Hussain Shah and Taraneh Younesian},
-  title         = {Hierarchical Conformal Classification},
-  year          = {2025},
-  eprint        = {2508.13288},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.LG}
+@inproceedings{tan2024survey,
+  author    = {Tan, Zhen and Li, Dawei and Wang, Song and Beigi, Alimohammad and Jiang, Bohan and Bhattacharjee, Amrita and Karami, Mansooreh and Li, Jundong and Cheng, Lu and Liu, Huan},
+  title     = {Large Language Models for Data Annotation and Synthesis: A Survey},
+  booktitle = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {930--957},
+  year      = {2024},
+  doi       = {10.18653/v1/2024.emnlp-main.54}
 }
 
-@misc{mortier2025conformal,
-  author        = {Thomas Mortier and Alireza Javanmardi and Yusuf Sale and Eyke H\"ullermeier and Willem Waegeman},
-  title         = {Conformal Prediction in Hierarchical Classification with Constrained Representation Complexity},
-  year          = {2025},
-  eprint        = {2501.19038},
-  archivePrefix = {arXiv},
-  primaryClass  = {stat.ML}
+@inproceedings{wang2021gpt3,
+  author    = {Wang, Shuohang and Liu, Yang and Xu, Yichong and Zhu, Chenguang and Zeng, Michael},
+  title     = {Want To Reduce Labeling Cost? {GPT-3} Can Help},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2021},
+  pages     = {4195--4205},
+  year      = {2021},
+  doi       = {10.18653/v1/2021.findings-emnlp.354}
+}
+
+@inproceedings{he2024annollm,
+  author    = {He, Xingwei and Lin, Zhenghao and Gong, Yeyun and Jin, A-Long and Zhang, Hang and Lin, Chen and Jiao, Jian and Yiu, Siu Ming and Duan, Nan and Chen, Weizhu},
+  title     = {{AnnoLLM}: Making Large Language Models to Be Better Crowdsourced Annotators},
+  booktitle = {Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 6: Industry Track)},
+  pages     = {165--190},
+  year      = {2024},
+  doi       = {10.18653/v1/2024.naacl-industry.15}
+}
+
+@inproceedings{li2023coannotating,
+  author    = {Li, Minzhi and Shi, Taiwei and Ziems, Caleb and Kan, Min-Yen and Chen, Nancy and Liu, Zhengyuan and Yang, Diyi},
+  title     = {{CoAnnotating}: Uncertainty-Guided Work Allocation between Human and Large Language Models for Data Annotation},
+  booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {1487--1505},
+  year      = {2023},
+  doi       = {10.18653/v1/2023.emnlp-main.92}
+}
+
+@inproceedings{wang2024humanllm,
+  author    = {Wang, Xinru and Kim, Hannah and Rahman, Sajjadur and Mitra, Kushan and Miao, Zhengjie},
+  title     = {Human-{LLM} Collaborative Annotation Through Effective Verification of {LLM} Labels},
+  booktitle = {Proceedings of the CHI Conference on Human Factors in Computing Systems},
+  pages     = {1--21},
+  year      = {2024},
+  doi       = {10.1145/3613904.3641960}
+}
+
+@inproceedings{kim2024meganno,
+  author    = {Kim, Hannah and Mitra, Kushan and Li Chen, Rafael and Rahman, Sajjadur and Zhang, Dan},
+  title     = {{MEGAnno+}: A Human-{LLM} Collaborative Annotation System},
+  booktitle = {Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics: System Demonstrations},
+  pages     = {168--176},
+  year      = {2024},
+  doi       = {10.18653/v1/2024.eacl-demo.18}
+}
+
+@article{wu2022hitl,
+  author  = {Wu, Xingjiao and Xiao, Luwei and Sun, Yixuan and Zhang, Junhang and Ma, Tianlong and He, Liang},
+  title   = {A Survey of Human-in-the-Loop for Machine Learning},
+  journal = {Future Generation Computer Systems},
+  volume  = {135},
+  pages   = {364--381},
+  year    = {2022},
+  doi     = {10.1016/j.future.2022.05.014}
+}
+
+%% ---------------------------------------------------------------- LLM uncertainty
+@inproceedings{wang2023selfconsistency,
+  author    = {Wang, Xuezhi and Wei, Jason and Schuurmans, Dale and Le, Quoc and Chi, Ed and Narang, Sharan and Chowdhery, Aakanksha and Zhou, Denny},
+  title     = {Self-Consistency Improves Chain of Thought Reasoning in Language Models},
+  booktitle = {International Conference on Learning Representations (ICLR 2023)},
+  year      = {2023},
+  doi       = {10.48550/arXiv.2203.11171}
+}
+
+@inproceedings{kuhn2023semantic,
+  author    = {Kuhn, Lorenz and Gal, Yarin and Farquhar, Sebastian},
+  title     = {Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation in Natural Language Generation},
+  booktitle = {International Conference on Learning Representations (ICLR 2023)},
+  year      = {2023},
+  doi       = {10.48550/arXiv.2302.09664}
+}
+
+@inproceedings{xiong2024llms,
+  author    = {Xiong, Miao and Hu, Zhiyuan and Lu, Xinyang and Li, Yifei and Fu, Jie and He, Junxian and Hooi, Bryan},
+  title     = {Can {LLMs} Express Their Uncertainty? {An} Empirical Evaluation of Confidence Elicitation in {LLMs}},
+  booktitle = {International Conference on Learning Representations (ICLR 2024)},
+  year      = {2024},
+  doi       = {10.48550/arXiv.2306.13063}
+}
+
+@inproceedings{guo2017calibration,
+  author    = {Guo, Chuan and Pleiss, Geoff and Sun, Yu and Weinberger, Kilian Q.},
+  title     = {On Calibration of Modern Neural Networks},
+  booktitle = {Proceedings of the 34th International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {70},
+  pages     = {1321--1330},
+  year      = {2017},
+  url       = {https://proceedings.mlr.press/v70/guo17a.html}
+}
+
+%% ---------------------------------------------------------------- selective / hierarchical classification
+@article{chow1970optimum,
+  author  = {Chow, C. K.},
+  title   = {On Optimum Recognition Error and Reject Tradeoff},
+  journal = {IEEE Transactions on Information Theory},
+  volume  = {16},
+  number  = {1},
+  pages   = {41--46},
+  year    = {1970},
+  doi     = {10.1109/TIT.1970.1054406}
+}
+
+@inproceedings{geifman2017selective,
+  author    = {Geifman, Yonatan and El-Yaniv, Ran},
+  title     = {Selective Classification for Deep Neural Networks},
+  booktitle = {Advances in Neural Information Processing Systems 30 (NIPS 2017)},
+  pages     = {4878--4887},
+  year      = {2017},
+  url       = {https://papers.nips.cc/paper_files/paper/2017/hash/4a8423d5e91fda00bb7e46540e2b0cf1-Abstract.html}
+}
+
+@inproceedings{goren2024hierarchical,
+  author    = {Goren, Shani and Galil, Ido and El-Yaniv, Ran},
+  title     = {Hierarchical Selective Classification},
+  booktitle = {Advances in Neural Information Processing Systems 37 (NeurIPS 2024)},
+  pages     = {111047--111073},
+  year      = {2024},
+  doi       = {10.52202/079017-3526}
+}
+
+@article{silla2011survey,
+  author  = {Silla, Carlos N. and Freitas, Alex A.},
+  title   = {A Survey of Hierarchical Classification across Different Application Domains},
+  journal = {Data Mining and Knowledge Discovery},
+  volume  = {22},
+  number  = {1--2},
+  pages   = {31--72},
+  year    = {2011},
+  doi     = {10.1007/s10618-010-0175-9}
+}
+
+@inproceedings{zhou2020hiagm,
+  author    = {Zhou, Jie and Ma, Chunping and Long, Dingkun and Xu, Guangwei and Ding, Ning and Zhang, Haoyu and Xie, Pengjun and Liu, Gongshen},
+  title     = {Hierarchy-Aware Global Model for Hierarchical Text Classification},
+  booktitle = {Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},
+  pages     = {1106--1117},
+  year      = {2020},
+  doi       = {10.18653/v1/2020.acl-main.104}
+}
+
+%% ---------------------------------------------------------------- conformal prediction and risk control
+@book{vovk2022algorithmic,
+  author    = {Vovk, Vladimir and Gammerman, Alexander and Shafer, Glenn},
+  title     = {Algorithmic Learning in a Random World},
+  edition   = {2nd},
+  publisher = {Springer},
+  address   = {Cham},
+  year      = {2022},
+  doi       = {10.1007/978-3-031-06649-8}
+}
+
+@article{angelopoulos2023gentle,
+  author  = {Angelopoulos, Anastasios N. and Bates, Stephen},
+  title   = {Conformal Prediction: A Gentle Introduction},
+  journal = {Foundations and Trends in Machine Learning},
+  volume  = {16},
+  number  = {4},
+  pages   = {494--591},
+  year    = {2023},
+  doi     = {10.1561/2200000101}
+}
+
+@inproceedings{mortier2026conformal,
+  author    = {Mortier, Thomas and Javanmardi, Alireza and Sale, Yusuf and H\"ullermeier, Eyke and Waegeman, Willem},
+  title     = {Conformal Prediction in Hierarchical Classification with Constrained Representation Complexity},
+  booktitle = {Proceedings of the 29th International Conference on Artificial Intelligence and Statistics},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {300},
+  pages     = {1324--1332},
+  year      = {2026},
+  url       = {https://proceedings.mlr.press/v300/mortier26a.html}
 }
 
 @inproceedings{tyagi2023multilabel,
-  author    = {Chhavi Tyagi and Wenge Guo},
+  author    = {Tyagi, Chhavi and Guo, Wenge},
   title     = {Multi-label Classification under Uncertainty: A Tree-based Conformal Prediction Approach},
   booktitle = {Proceedings of the Twelfth Symposium on Conformal and Probabilistic Prediction with Applications},
-  series    = {PMLR},
+  series    = {Proceedings of Machine Learning Research},
   volume    = {204},
   pages     = {488--512},
-  year      = {2023}
+  year      = {2023},
+  url       = {https://proceedings.mlr.press/v204/tyagi23a.html}
+}
+
+@article{bates2021rcps,
+  author  = {Bates, Stephen and Angelopoulos, Anastasios and Lei, Lihua and Malik, Jitendra and Jordan, Michael},
+  title   = {Distribution-Free, Risk-Controlling Prediction Sets},
+  journal = {Journal of the ACM},
+  volume  = {68},
+  number  = {6},
+  pages   = {1--34},
+  year    = {2021},
+  doi     = {10.1145/3478535}
 }
 
 @article{angelopoulos2025learnthen,
-  author  = {Anastasios N. Angelopoulos and Stephen Bates and Emmanuel J. Cand\`es and Michael I. Jordan and Lihua Lei},
-  title   = {Learn then Test: Calibrating Predictive Algorithms to Achieve Risk Control},
+  author  = {Angelopoulos, Anastasios N. and Bates, Stephen and Cand\`es, Emmanuel J. and Jordan, Michael I. and Lei, Lihua},
+  title   = {Learn Then Test: Calibrating Predictive Algorithms to Achieve Risk Control},
   journal = {The Annals of Applied Statistics},
   volume  = {19},
   number  = {2},
@@ -106,8 +306,28 @@
   doi     = {10.1214/24-AOAS1998}
 }
 
+@inproceedings{angelopoulos2024conformal,
+  author    = {Angelopoulos, Anastasios N. and Bates, Stephen and Fisch, Adam and Lei, Lihua and Schuster, Tal},
+  title     = {Conformal Risk Control},
+  booktitle = {International Conference on Learning Representations (ICLR 2024)},
+  year      = {2024},
+  doi       = {10.48550/arXiv.2208.02814}
+}
+
+%% ---------------------------------------------------------------- multiple testing and betting
+@article{benjamini1995fdr,
+  author  = {Benjamini, Yoav and Hochberg, Yosef},
+  title   = {Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing},
+  journal = {Journal of the Royal Statistical Society: Series B (Methodological)},
+  volume  = {57},
+  number  = {1},
+  pages   = {289--300},
+  year    = {1995},
+  doi     = {10.1111/j.2517-6161.1995.tb02031.x}
+}
+
 @article{bauer1991multiple,
-  author  = {Peter Bauer},
+  author  = {Bauer, Peter},
   title   = {Multiple Testing in Clinical Trials},
   journal = {Statistics in Medicine},
   volume  = {10},
@@ -117,8 +337,19 @@
   doi     = {10.1002/sim.4780100609}
 }
 
+@article{berger1982multiparameter,
+  author  = {Berger, Roger L.},
+  title   = {Multiparameter Hypothesis Testing and Acceptance Sampling},
+  journal = {Technometrics},
+  volume  = {24},
+  number  = {4},
+  pages   = {295--300},
+  year    = {1982},
+  doi     = {10.1080/00401706.1982.10487790}
+}
+
 @article{waudbysmith2024estimating,
-  author  = {Ian Waudby-Smith and Aaditya Ramdas},
+  author  = {Waudby-Smith, Ian and Ramdas, Aaditya},
   title   = {Estimating Means of Bounded Random Variables by Betting},
   journal = {Journal of the Royal Statistical Society Series B: Statistical Methodology},
   volume  = {86},
@@ -128,60 +359,31 @@
   doi     = {10.1093/jrsssb/qkad009}
 }
 
-@inproceedings{guo2017calibration,
-  author    = {Chuan Guo and Geoff Pleiss and Yu Sun and Kilian Q. Weinberger},
-  title     = {On Calibration of Modern Neural Networks},
-  booktitle = {Proceedings of the 34th International Conference on Machine Learning},
-  series    = {PMLR},
-  volume    = {70},
-  pages     = {1321--1330},
-  year      = {2017}
+@article{ramdas2023game,
+  author  = {Ramdas, Aaditya and Gr\"unwald, Peter and Vovk, Vladimir and Shafer, Glenn},
+  title   = {Game-Theoretic Statistics and Safe Anytime-Valid Inference},
+  journal = {Statistical Science},
+  volume  = {38},
+  number  = {4},
+  pages   = {576--601},
+  year    = {2023},
+  doi     = {10.1214/23-STS894}
 }
 
-@article{lewis2004rcv1,
-  author  = {David D. Lewis and Yiming Yang and Tony G. Rose and Fan Li},
-  title   = {{RCV1}: A New Benchmark Collection for Text Categorization Research},
-  journal = {Journal of Machine Learning Research},
-  volume  = {5},
-  pages   = {361--397},
-  year    = {2004}
+@article{nadeau2003inference,
+  author  = {Nadeau, Claude and Bengio, Yoshua},
+  title   = {Inference for the Generalization Error},
+  journal = {Machine Learning},
+  volume  = {52},
+  number  = {3},
+  pages   = {239--281},
+  year    = {2003},
+  doi     = {10.1023/A:1024068626366}
 }
 
-@misc{wang2026hc3,
-  author = {Hongsheng Wang and Xiubo Liang and Fei Wu},
-  title  = {Calibrating Multi-Axis Multi-Label Annotators with Cross-Axis Co-Occurrence},
-  year   = {2026},
-  note   = {Submitted to {COLING} 2027 via {ACL} Rolling Review (ARR), October 2026 cycle, submission 6341}
-}
-
-@inproceedings{goren2024hierarchical,
-  author    = {Shani Goren and Ido Galil and Ran El-Yaniv},
-  title     = {Hierarchical Selective Classification},
-  booktitle = {Advances in Neural Information Processing Systems 37 (NeurIPS 2024)},
-  pages     = {111047--111073},
-  year      = {2024},
-  doi       = {10.52202/079017-3526}
-}
-
-@inproceedings{geifman2017selective,
-  author    = {Yonatan Geifman and Ran El-Yaniv},
-  title     = {Selective Classification for Deep Neural Networks},
-  booktitle = {Advances in Neural Information Processing Systems 30 (NIPS 2017)},
-  year      = {2017},
-  note      = {arXiv:1705.08500},
-  pages     = {4878--4887}
-}
-
-@inproceedings{angelopoulos2024conformal,
-  author    = {Anastasios N. Angelopoulos and Stephen Bates and Adam Fisch and Lihua Lei and Tal Schuster},
-  title     = {Conformal Risk Control},
-  booktitle = {International Conference on Learning Representations (ICLR 2024)},
-  year      = {2024},
-  note      = {arXiv:2208.02814}
-}
-
+%% ---------------------------------------------------------------- inference with LLM labels
 @article{angelopoulos2023ppi,
-  author  = {Anastasios N. Angelopoulos and Stephen Bates and Clara Fannjiang and Michael I. Jordan and Tijana Zrnic},
+  author  = {Angelopoulos, Anastasios N. and Bates, Stephen and Fannjiang, Clara and Jordan, Michael I. and Zrnic, Tijana},
   title   = {Prediction-Powered Inference},
   journal = {Science},
   volume  = {382},
@@ -192,39 +394,112 @@
 }
 
 @inproceedings{gligoric2025unconfident,
-  author    = {Kristina Gligori\'c and Tijana Zrnic and Cinoo Lee and Emmanuel J. Cand\`es and Dan Jurafsky},
+  author    = {Gligori\'c, Kristina and Zrnic, Tijana and Lee, Cinoo and Cand\`es, Emmanuel J. and Jurafsky, Dan},
   title     = {Can Unconfident {LLM} Annotations Be Used for Confident Conclusions?},
-  booktitle = {Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics (NAACL 2025)},
+  booktitle = {Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)},
   pages     = {3514--3533},
   year      = {2025},
   doi       = {10.18653/v1/2025.naacl-long.179}
 }
 
-@article{silla2011survey,
-  author  = {Carlos N. Silla and Alex A. Freitas},
-  title   = {A Survey of Hierarchical Classification across Different Application Domains},
-  journal = {Data Mining and Knowledge Discovery},
-  volume  = {22},
-  number  = {1--2},
-  pages   = {31--72},
-  year    = {2011},
-  doi     = {10.1007/s10618-010-0175-9}
+%% ---------------------------------------------------------------- corpora
+@article{lewis2004rcv1,
+  author  = {Lewis, David D. and Yang, Yiming and Rose, Tony G. and Li, Fan},
+  title   = {{RCV1}: A New Benchmark Collection for Text Categorization Research},
+  journal = {Journal of Machine Learning Research},
+  volume  = {5},
+  pages   = {361--397},
+  year    = {2004},
+  url     = {https://www.jmlr.org/papers/v5/lewis04a.html}
 }
 
-@article{nadeau2003inference,
-  author  = {Claude Nadeau and Yoshua Bengio},
-  title   = {Inference for the Generalization Error},
-  journal = {Machine Learning},
-  volume  = {52},
-  number  = {3},
-  pages   = {239--281},
-  year    = {2003},
-  doi     = {10.1023/A:1024068626366}
+@article{lehmann2015dbpedia,
+  author  = {Lehmann, Jens and Isele, Robert and Jakob, Max and Jentzsch, Anja and Kontokostas, Dimitris and Mendes, Pablo N. and Hellmann, Sebastian and Morsey, Mohamed and van Kleef, Patrick and Auer, S\"oren and Bizer, Christian},
+  title   = {{DBpedia} -- A Large-Scale, Multilingual Knowledge Base Extracted from {W}ikipedia},
+  journal = {Semantic Web},
+  volume  = {6},
+  number  = {2},
+  pages   = {167--195},
+  year    = {2015},
+  doi     = {10.3233/SW-140134}
 }
 
-@article{hou2024amazon,
-  title   = {Bridging Language and Items for Retrieval and Recommendation},
-  author  = {Hou, Yupeng and Li, Jiacheng and He, Zhankui and Yan, An and Chen, Xiusi and McAuley, Julian},
-  journal = {arXiv preprint arXiv:2403.03952},
-  year    = {2024}
+@inproceedings{kowsari2017hdltex,
+  author    = {Kowsari, Kamran and Brown, Donald E. and Heidarysafa, Mojtaba and Jafari Meimandi, Kiana and Gerber, Matthew S. and Barnes, Laura E.},
+  title     = {{HDLTex}: Hierarchical Deep Learning for Text Classification},
+  booktitle = {2017 16th IEEE International Conference on Machine Learning and Applications (ICMLA)},
+  pages     = {364--371},
+  year      = {2017},
+  doi       = {10.1109/ICMLA.2017.0-134}
+}
+
+@inproceedings{aly2019hierarchical,
+  author    = {Aly, Rami and Remus, Steffen and Biemann, Chris},
+  title     = {Hierarchical Multi-label Classification of Text with Capsule Networks},
+  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics: Student Research Workshop},
+  pages     = {323--330},
+  year      = {2019},
+  doi       = {10.18653/v1/P19-2045}
+}
+
+@inproceedings{hou2026amazon,
+  author    = {Hou, Yupeng and Li, Jiacheng and Fu, Xiangjun and He, Zhankui and Yan, An and Chen, Xiusi and McAuley, Julian},
+  title     = {Bridging Language and Items for Retrieval and Recommendation: Benchmarking {LLMs} as Semantic Encoders},
+  booktitle = {Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {3251--3265},
+  year      = {2026},
+  doi       = {10.18653/v1/2026.acl-long.147}
+}
+
+@article{demsar2006statistical,
+  author  = {Dem{\v{s}}ar, Janez},
+  title   = {Statistical Comparisons of Classifiers over Multiple Data Sets},
+  journal = {Journal of Machine Learning Research},
+  volume  = {7},
+  pages   = {1--30},
+  year    = {2006},
+  url     = {https://jmlr.org/papers/v7/demsar06a.html}
+}
+
+@misc{dbpediaclasses2022data,
+  author       = {{DeveloperOats}},
+  title        = {{DBPedia} Classes},
+  year         = {2022},
+  howpublished = {Hugging Face},
+  url          = {https://huggingface.co/datasets/DeveloperOats/DBPedia_Classes},
+  note         = {{A}ccessed October 30, 2026}
+}
+
+@misc{kowsari2018wosdata,
+  author       = {Kowsari, Kamran},
+  title        = {{Web of Science} Dataset},
+  year         = {2018},
+  howpublished = {Mendeley Data, v6},
+  doi          = {10.17632/9rw3vkcfy4.6}
+}
+
+@misc{bgc2019data,
+  author       = {{Language Technology Group, Universit\"at Hamburg}},
+  title        = {{Blurb Genre Collection}},
+  year         = {n.d.},
+  howpublished = {Universit\"at Hamburg},
+  url          = {https://www.inf.uni-hamburg.de/en/inst/ab/lt/resources/data/blurb-genre-collection.html},
+  note         = {{A}ccessed October 30, 2026}
+}
+
+@misc{amazonreviews2023data,
+  author       = {{McAuley Lab}},
+  title        = {{Amazon Reviews 2023}},
+  year         = {2024},
+  howpublished = {Hugging Face},
+  url          = {https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023},
+  note         = {{A}ccessed October 30, 2026}
+}
+
+@inproceedings{zhang2025conformal,
+  author    = {Zhang, Botong and Li, Shuo and Bastani, Osbert},
+  title     = {Conformal Structured Prediction},
+  booktitle = {International Conference on Learning Representations (ICLR 2025)},
+  year      = {2025},
+  url       = {https://proceedings.iclr.cc/paper_files/paper/2025/hash/1868a3c73d0d2a44c42458575fa8514c-Abstract-Conference.html}
 }

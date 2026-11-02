@@ -24,3 +24,4 @@ code/texput.log
 # internal notes and platform glue (not part of the paper)
 STATUS.md
 code/platform_sync.py
+paper/build/

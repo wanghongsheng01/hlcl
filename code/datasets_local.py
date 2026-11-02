@@ -10,8 +10,9 @@ DATA = Path(__file__).resolve().parents[1] / "data"
 
 
 def _dbpedia():
-    # official validation split (11,152 items; 9 / 70 / 219 labels at l1 / l2 / l3)
-    df = pd.read_csv(DATA / "DBPEDIA_val.csv").dropna().reset_index(drop=True)
+    # first 11,151 records of the validation split (9 / 70 / 219 labels at l1 / l2 / l3);
+    # the experiments sampled from these records, so the published runs need this frame
+    df = pd.read_csv(DATA / "DBPEDIA_val.csv").dropna().iloc[:11151].reset_index(drop=True)
     tree: dict = {}
     for a, b, c in df[["l1", "l2", "l3"]].drop_duplicates().itertuples(index=False):
         tree.setdefault(a, {}).setdefault(b, []).append(c)

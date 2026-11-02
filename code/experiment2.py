@@ -243,7 +243,7 @@ def run(dataset, tag, n, k, R, alphas, delta, m_levels, out, ncal=None, light=Fa
         for al in alphas:
             row = {"split": r, "alpha": al}
             if item_only:
-                # Item-cert. under each fixed test (reviewer request); same splits
+                # Item-cert. under each fixed test; same splits
                 for nm, tt in (("ItemLTT-wsr", ("wsr",)), ("ItemLTT-iut", ("iut",))):
                     lam_i, _, how_i = item_certified(S, C, M, fi, ci, al, delta, tests=tt, So=So)
                     Sti = np.where(M[ti], item_score(S[ti], M[ti])[:, None], np.nan)
